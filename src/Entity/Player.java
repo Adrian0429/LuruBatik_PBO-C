@@ -75,6 +75,8 @@ public class Player extends Entity{
 	left2 = setup("/player/elf_side02_walk2");
 	left3 = setup("/player/elf_side02_walk3");
 	titlePict = setup("/PictureStuff/logo_mbatik");
+	menuSel = setup("/PictureStuff/scroll");
+
 	}
 	
 	
@@ -161,16 +163,20 @@ public class Player extends Entity{
 				break;
 				
 			case "chest":
-				hasKey--;
-				gp.playSE(2);
-				gp.obj[i] = null;
-				break;
+				if(hasKey > 0) {
+					hasKey--;
+					gp.playSE(2);
+					gp.obj[i] = null;
+					break;	
+				}
 				
 			case "chest_gold":
-				hasKey--;
-				gp.playSE(2);
-				gp.obj[i] = null;
-				break;
+				if(hasKey > 0) {
+					hasKey--;
+					gp.playSE(2);
+					gp.obj[i] = null;
+					break;	
+				}
 			}
 		}
 	}

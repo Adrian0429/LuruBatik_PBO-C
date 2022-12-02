@@ -144,7 +144,8 @@ public class UI {
 		g2.drawString(text, x, y);
 		if(command == 0) {
 			//you can use draw image for this
-			g2.drawString(">", x - gp.tilesize, y);
+			g2.drawImage(gp.player.menuSel, x-(gp.tilesize + 4), y-gp.tilesize, null);
+			//g2.drawString(">", x - gp.tilesize, y);
 		}
 		
 		text = "CONTINUE";
@@ -153,7 +154,8 @@ public class UI {
 		g2.drawString(text, x, y);
 		if(command == 1) {
 			//you can use draw image for this
-			g2.drawString(">", x - gp.tilesize, y);
+			g2.drawImage(gp.player.menuSel, x-(gp.tilesize + 4), y-gp.tilesize, null);
+			//g2.drawString(">", x - gp.tilesize, y);
 		}
 		
 		text = "EXIT";
@@ -162,7 +164,8 @@ public class UI {
 		g2.drawString(text, x, y);
 		if(command == 2) {
 			//you can use draw image for this
-			g2.drawString(">", x - gp.tilesize, y);
+			g2.drawImage(gp.player.menuSel, x-(gp.tilesize + 4), y-gp.tilesize, null);
+			//g2.drawString(">", x - gp.tilesize, y);
 		}
 		
 	}
