@@ -3,20 +3,27 @@ package main;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.security.PublicKey;
 
 import javax.security.auth.x500.X500Principal;
 import javax.xml.transform.Templates;
 
+import object.SuperObject;
+import object.obj_heart;
 import object.obj_key;
 
 public class UI {
 	panelGame gp;
 	Graphics2D g2;
-	Font arial = new Font("Arial", Font.PLAIN, 40);
-	Font arial_80B = new Font("Arial", Font.BOLD, 80);
+	Font goblinFont;
+	BufferedImage heart_full, heart_half, heart_blank;
 	public boolean messageOn = false;
 	public String message = "";
 	int messageCounter = 0;
@@ -26,7 +33,20 @@ public class UI {
 
 	public UI(panelGame gp) {
 		this.gp = gp;
-
+		
+		InputStream is = getClass().getResourceAsStream("/font/AGoblinAppears.ttf");
+		try {
+			goblinFont = Font.createFont(Font.TRUETYPE_FONT, is);
+		} catch (FontFormatException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//CREATE HUD OBJECT
+		SuperObject heart = new obj_heart(gp);
+		heart_full = heart.image;
+		heart_half = heart.image2;
+		heart_blank = heart.image3;
 	}
 	
 	public void showMessage(String text) {
@@ -37,7 +57,8 @@ public class UI {
 	public void draw(Graphics2D g2) {
 		this.g2 = g2;
 		
-		g2.setFont(arial);
+		g2.setFont(goblinFont);
+		g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g2.setColor(Color.white);
 		
 		
@@ -47,25 +68,57 @@ public class UI {
 		}
 		//playstate
 		if(gp.gameState == gp.playState) {
-			//do something
+			drawPlayerLife();
 		}
 		//pausestate
 		if(gp.gameState == gp.pauseState) {
+			drawPlayerLife();
 			drawPauseScreen();
 		}
 		
 		//dialogue state
 		if(gp.gameState == gp.dialogueState) {
+			drawPlayerLife();
 			drawDialogueScreen();
 		}
 	}
+	
+	public void drawPlayerLife() {
+		int x = gp.tilesize / 2;
+		int y = gp.tilesize / 2;
+		int i = 0;
+		
+		//DRAW MAX LIFE
+		while(i < gp.player.maxLife/2) {
+			g2.drawImage(heart_blank, x, y, null);
+			i++;
+			x += gp.tilesize;
+		}
+		
+		//RESET
+		x = gp.tilesize/2;
+		y = gp.tilesize /2;
+		i = 0; 
+		
+		//DRAW CURRENT LIFE
+		while(i < gp.player.life) {
+			g2.drawImage(heart_blank, x, y, null);
+			i++;
+			if (i < gp.player.life) {
+				g2.drawImage(heart_blank, x, y, null);
+			}
+			i++;
+			x += gp.tilesize;
+		}
+	}
+	
 	
 	public void drawTitleScreen() {
 		//background color
 		g2.setColor(Color.black);
 		g2.fillRect(0, 0, gp.panjangScreen, gp.TinggiScreen);
 		
-		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 80F));
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 65F));
 		String text = "Luru Batik";
 		int x = getXforCenteredText(text);
 		int y = gp.tilesize*3;
@@ -80,10 +133,10 @@ public class UI {
 		//title character image 
 		x = gp.panjangScreen/2 - (gp.tilesize*2)/2;
 		y += gp.tilesize*2;
-		g2.drawImage(gp.player.logo, x, y, gp.tilesize*2, gp.tilesize*2, null);
+		g2.drawImage(gp.player.titlePict, x, y, gp.tilesize*2, gp.tilesize*2, null);
 		
 		//menu optionss
-		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40F));
+		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
 		
 		text = "NEW GAME";
 		x = getXforCenteredText(text);
@@ -113,9 +166,11 @@ public class UI {
 		}
 		
 	}
+	
+	
 	public void drawPauseScreen() {
 		
-		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 80F));
+		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 72F));
 		String text = "PAUSED";
 		int x = getXforCenteredText(text);
 		int y = gp.TinggiScreen/2;
@@ -138,7 +193,7 @@ public class UI {
 		
 		drawSubWindow(x, y, width, height);
 		
-		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 30F));
+		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 20F));
 		x += gp.tilesize;
 		y += gp.tilesize;
 		
@@ -159,5 +214,7 @@ public class UI {
 		g2.setStroke(new BasicStroke(5));
 		g2.drawRoundRect(x+5, y+5, width-10, height-10, 25, 25);
 	}
+	
+	
 }
 

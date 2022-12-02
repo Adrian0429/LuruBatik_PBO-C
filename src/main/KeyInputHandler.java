@@ -51,9 +51,7 @@ public class KeyInputHandler implements KeyListener{
 			}
 	}
 		
-		
-		
-		
+
 		
 		//playstate
 		if(gp.gameState == gp.playState) {

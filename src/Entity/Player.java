@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InterruptedIOException;
 
 import javax.imageio.ImageIO;
+import javax.management.ObjectName;
 
 import main.KeyInputHandler;
 import main.UtilityTool;
@@ -20,6 +21,10 @@ public class Player extends Entity{
 	public final int screenX;
 	public final int screenY;
 	public int hasKey = 0;
+
+	public int solidAreaDefaultX;
+
+	public int solidAreaDefaultY;
 	
 	public Player(panelGame gp, KeyInputHandler keyH) {
 		
@@ -46,8 +51,13 @@ public class Player extends Entity{
 	public void setDefaultValue() {
 		worldX = gp.tilesize * 24;
 		worldY = gp.tilesize * 44;
-		speed = 10;
+		speed = 4;
 		direction = "down";
+		
+		//PLAYER STATUS
+		maxLife = 6;
+		life = maxLife;
+		
 	}
 	
 	public void getPlayerImage() {
@@ -64,8 +74,7 @@ public class Player extends Entity{
 	left1 = setup("/player/elf_side02_walk1");
 	left2 = setup("/player/elf_side02_walk2");
 	left3 = setup("/player/elf_side02_walk3");
-	logo = setup("/PictureStuff/logo_mbatik");
-	
+	titlePict = setup("/PictureStuff/logo_mbatik");
 	}
 	
 	
@@ -138,28 +147,29 @@ public class Player extends Entity{
 		
 	}
 	
-public void pickupObject(int i) {
+	public void pickupObject(int i) {
 		
 		if(i != 999) {
+			
 			String objectName = gp.obj[i].name;
 			
 			switch(objectName) {
-			case "key":
-				gp.playSE(1);
+			case "key": 
 				hasKey++;
+				gp.obj[i] =  null;
+				gp.playSE(1);
+				break;
+				
+			case "chest":
+				hasKey--;
+				gp.playSE(2);
 				gp.obj[i] = null;
 				break;
-			case "chest":
-				if(hasKey > 0) {
-					gp.obj[i] = null;
-					hasKey--;
-				}
-				break;
+				
 			case "chest_gold":
-				if(hasKey > 0) {
-					gp.obj[i] = null;
-					hasKey--;
-				}
+				hasKey--;
+				gp.playSE(2);
+				gp.obj[i] = null;
 				break;
 			}
 		}

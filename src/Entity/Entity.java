@@ -18,7 +18,8 @@ public class Entity {
 	 
 	
 	public BufferedImage up1, up2, up3, left1, left2, left3;
-	public BufferedImage right1, right2, right3, down1, down2, down3, logo;
+	public BufferedImage right1, right2, right3, down1, down2, down3, titlePict;
+	
 	public String direction;
 	
 	public int charcounter = 0;
@@ -30,6 +31,11 @@ public class Entity {
 	public int actionLockCounter = 0;
 	String dialogues[] = new String[20];
 	int dialogueIndex = 0;
+	
+	//CHARACTER STATUS
+	public int maxLife;
+	public int life;
+	
 	public Entity(panelGame gp) {
 		this.gp = gp;
 		
