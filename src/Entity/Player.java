@@ -46,7 +46,7 @@ public class Player extends Entity{
 	public void setDefaultValue() {
 		worldX = gp.tilesize * 24;
 		worldY = gp.tilesize * 44;
-		speed = 4;
+		speed = 10;
 		direction = "down";
 	}
 	
@@ -64,7 +64,8 @@ public class Player extends Entity{
 	left1 = setup("/player/elf_side02_walk1");
 	left2 = setup("/player/elf_side02_walk2");
 	left3 = setup("/player/elf_side02_walk3");
-
+	logo = setup("/PictureStuff/logo_mbatik");
+	
 	}
 	
 	
@@ -137,10 +138,30 @@ public class Player extends Entity{
 		
 	}
 	
-	public void pickupObject(int i) {
+public void pickupObject(int i) {
 		
 		if(i != 999) {
-		
+			String objectName = gp.obj[i].name;
+			
+			switch(objectName) {
+			case "key":
+				gp.playSE(1);
+				hasKey++;
+				gp.obj[i] = null;
+				break;
+			case "chest":
+				if(hasKey > 0) {
+					gp.obj[i] = null;
+					hasKey--;
+				}
+				break;
+			case "chest_gold":
+				if(hasKey > 0) {
+					gp.obj[i] = null;
+					hasKey--;
+				}
+				break;
+			}
 		}
 	}
 	

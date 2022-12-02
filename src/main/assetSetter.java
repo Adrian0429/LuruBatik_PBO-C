@@ -1,6 +1,7 @@
 package main;
 
 import Entity.NPC_Bakul;
+import object.obj_chestGold;
 import object.obj_chest_brown;
 import object.obj_key;
 
@@ -25,6 +26,14 @@ public class assetSetter {
 		gp.obj[2] = new obj_chest_brown(gp);
 		gp.obj[2].worldX = 38*gp.tilesize;
 		gp.obj[2].worldY = 26*gp.tilesize;
+		
+		gp.obj[3] = new obj_chestGold(gp);
+		gp.obj[3].worldX = 43*gp.tilesize;
+		gp.obj[3].worldY = 43*gp.tilesize;
+		
+		gp.obj[4] = new obj_chestGold(gp);
+		gp.obj[4].worldX = 29*gp.tilesize;
+		gp.obj[4].worldY = 36*gp.tilesize;
 	}
 	
 	public void setNPC() {

@@ -80,7 +80,7 @@ public class UI {
 		//title character image 
 		x = gp.panjangScreen/2 - (gp.tilesize*2)/2;
 		y += gp.tilesize*2;
-		g2.drawImage(gp.player.down1, x, y, gp.tilesize*2, gp.tilesize*2, null);
+		g2.drawImage(gp.player.logo, x, y, gp.tilesize*2, gp.tilesize*2, null);
 		
 		//menu optionss
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40F));
