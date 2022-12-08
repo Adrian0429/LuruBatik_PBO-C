@@ -23,7 +23,6 @@ public class Player extends Entity{
 	public int hasKey = 0;
 
 	public int solidAreaDefaultX;
-
 	public int solidAreaDefaultY;
 	
 	public Player(panelGame gp, KeyInputHandler keyH) {
