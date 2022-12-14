@@ -30,7 +30,8 @@ public class UI {
 	public boolean gameEnd = false;
 	public String currentDialogue = "";
 	int command = 0;
-
+	int subState = 0;
+	
 	public UI(panelGame gp) {
 		this.gp = gp;
 		
@@ -80,6 +81,10 @@ public class UI {
 		if(gp.gameState == gp.dialogueState) {
 			drawPlayerLife();
 			drawDialogueScreen();
+		}
+		if(gp.gameState == gp.optionState) {
+			drawOptionScreen();
+			
 		}
 	}
 	
@@ -218,6 +223,61 @@ public class UI {
 		g2.drawRoundRect(x+5, y+5, width-10, height-10, 25, 25);
 	}
 	
-	
+	public void drawOptionScreen() {
+		g2.setColor(Color.white);
+		g2.setFont(g2.getFont().deriveFont(32F));
+		
+		//POSITION
+		int frameX = gp.tilesize * 6;
+		int frameY = gp.tilesize;
+		int frameWidth = gp.tilesize * 8;
+		int frameHeigt = gp.tilesize * 10;
+		drawSubWindow(frameX, frameY, frameWidth, frameHeigt);
+		
+		switch(subState) {
+		case 0: options_top(frameX, frameY);break;
+		case 1: break;
+		case 2: break;
+		}
+	}
+	public void options_top(int frameX, int frameY) {
+		int textX;
+		int textY;
+		
+		//TITLE
+		String text = "Options";
+		textX = getXforCenteredText(text);
+		textY = frameY + gp.tilesize;
+		g2.drawString(text, textX, textY);
+		
+		//full screen option
+		textX = frameX + gp.tilesize;
+		textY += gp.tilesize * 2;
+		g2.drawString("Full Screen", textX, textY);
+		if(command == 0) {
+			g2.drawString(">", textX-25, textY);
+		}
+		
+		//music
+		textY += gp.tilesize;
+		g2.drawString("Music", textX, textY);
+		if(command == 1) {
+			g2.drawString(">", textX-25, textY);
+		}
+		
+		//end game
+		textY += gp.tilesize;
+		g2.drawString("End Game", textX, textY);
+		if(command == 2) {
+			g2.drawString(">", textX-25, textY);
+		}
+		
+		//back
+		textY += gp.tilesize*2;
+		g2.drawString("Back", textX, textY);
+		if(command == 3) {
+			g2.drawString(">", textX-25, textY);
+		}
+	}
 }
 
