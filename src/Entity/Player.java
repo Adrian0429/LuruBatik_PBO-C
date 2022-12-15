@@ -99,6 +99,8 @@ public class Player extends Entity{
 				direction = "right";
 				
 			}
+			//check monster collision
+			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 			
 			//check tile collision 
 			collisionOn = false;

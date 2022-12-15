@@ -59,6 +59,7 @@ public class panelGame extends JPanel implements Runnable{
 	public Player player = new Player(this, KeyH);
 	public SuperObject obj[] = new SuperObject[10];
 	public Entity npc[] = new Entity[10];
+	public Entity monster[] = new Entity[20];
 	public assetSetter aSetter = new assetSetter(this);
 	public UI ui = new UI(this);
 	
@@ -87,6 +88,9 @@ public class panelGame extends JPanel implements Runnable{
 	public void setupGame() {
 		aSetter.setObject();
 		aSetter.setNPC();
+		aSetter.setMonster();
+		
+		
 		playMusic(0);
 		stopMusic();
 		gameState = titleState;
@@ -150,13 +154,17 @@ public class panelGame extends JPanel implements Runnable{
 	
 	public void update() {
 		
-
 		if(gameState == playState) {
 			player.update();	
 			
 			for(int i = 0; i< npc.length; i++) {
 				if(npc[i] != null) {
 					npc[i].update();
+				}
+			}
+			for(int i=0; i< monster.length; i++) {
+				if(monster[i] != null) {
+					monster[i].update();
 				}
 			}
 		}
@@ -190,6 +198,12 @@ public class panelGame extends JPanel implements Runnable{
 			for(int i=0; i<npc.length; i++) {
 				if(npc[i] != null) {
 					npc[i].draw(g2);
+				}
+			}
+			
+			for(int i=0; i<monster.length; i++) {
+				if(monster[i] != null) {
+					monster[i].draw(g2);
 				}
 			}
 			

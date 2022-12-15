@@ -1,5 +1,6 @@
 package Entity;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -15,7 +16,7 @@ public class Entity {
 	panelGame gp;
 	public int worldX, worldY;
 	public int speed;
-	 
+	public String name;
 	
 	public BufferedImage up1, up2, up3, left1, left2, left3;
 	public BufferedImage right1, right2, right3, down1, down2, down3, titlePict, menuSel;
@@ -74,6 +75,8 @@ public class Entity {
 		collisionOn = false;
 		gp.cChecker.checkTile(this);
 		gp.cChecker.checkObject(this, false);
+		gp.cChecker.checkEntity(this, gp.npc);
+		gp.cChecker.checkEntity(this, gp.monster);
 		gp.cChecker.checkPlayer(this);
 		
 		if(collisionOn == false) {
@@ -169,6 +172,11 @@ public class Entity {
 				}
 				break;
 			}
+			
+			//MONSTER HP BAR
+			g2.setColor(new Color(255, 0, 30));
+			g2.fillRect(screenX, screenY-15, gp.tilesize, 10);
+			
 			
 			g2.drawImage(image, screenX, screenY, gp.tilesize, gp.tilesize, null);
 			
