@@ -76,6 +76,8 @@ public class KeyInputHandler implements KeyListener{
 				enterPressed = true;
 			}if(kode == KeyEvent.VK_ESCAPE) {
 				gp.gameState = gp.optionState;
+			}if(kode == KeyEvent.VK_I) {
+				gp.gameState = gp.characterState;
 			}
 		}
 		
@@ -117,6 +119,39 @@ public class KeyInputHandler implements KeyListener{
 				if(gp.ui.command > maxCommand) {
 					gp.ui.command = 0;
 				}
+			}
+		//character state
+		}else if (gp.gameState == gp.characterState) {
+			if(kode == KeyEvent.VK_I || kode == KeyEvent.VK_ESCAPE) {
+				gp.gameState = gp.playState;
+			}
+			if(kode == KeyEvent.VK_W) {
+				if(gp.ui.slotRow != 0) {
+					gp.ui.slotRow--;
+					gp.playSE(6);
+				}
+
+			}
+			if(kode == KeyEvent.VK_A) {
+				if(gp.ui.slotCol != 0) {
+					gp.ui.slotCol--;
+					gp.playSE(6);
+				}
+
+			}
+			if(kode == KeyEvent.VK_S) {
+				if(gp.ui.slotRow != 3) {
+					gp.ui.slotRow++;
+					gp.playSE(6);
+				}
+
+			}
+			if(kode == KeyEvent.VK_D) {
+				if(gp.ui.slotCol != 4) {
+					gp.ui.slotCol++;
+					gp.playSE(6);
+				}
+
 			}
 		}
 	}

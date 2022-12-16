@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InterruptedIOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.management.ObjectName;
@@ -24,6 +25,8 @@ public class Player extends Entity{
 
 	public int solidAreaDefaultX;
 	public int solidAreaDefaultY;
+	public ArrayList <Entity> inventory = new ArrayList<>();
+	public final int inventorySize = 20;
 	
 	public Player(panelGame gp, KeyInputHandler keyH) {
 		

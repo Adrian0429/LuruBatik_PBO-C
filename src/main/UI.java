@@ -31,6 +31,8 @@ public class UI {
 	public String currentDialogue = "";
 	int command = 0;
 	int subState = 0;
+	public int slotCol = 0;
+	public int slotRow = 0;
 	
 	public UI(panelGame gp) {
 		this.gp = gp;
@@ -84,7 +86,11 @@ public class UI {
 		}
 		if(gp.gameState == gp.optionState) {
 			drawOptionScreen();
-			
+		}
+		
+		//character state
+		if(gp.gameState == gp.characterState){
+			drawInventory();
 		}
 	}
 	
@@ -223,6 +229,33 @@ public class UI {
 		g2.drawRoundRect(x+5, y+5, width-10, height-10, 25, 25);
 	}
 	
+	public void drawInventory() {
+		//frame
+		int frameX = gp.tilesize * 13;
+		int frameY = gp.tilesize;
+		int frameWidth = gp.tilesize * 6;
+		int frameHeight = gp.tilesize * 5;
+		int x = frameX + gp.tilesize;
+		int y = frameY + gp.tilesize*4;
+		drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+		
+		//slot
+		final int slotXstart = frameX + 20;
+		final int slotYstart = frameY + 20;
+		int slotX = slotXstart;
+		int slotY = slotYstart;
+		
+		//cursor
+		int cursorX = slotXstart + (gp.tilesize * slotCol);
+		int cursorY = slotYstart + (gp.tilesize * slotRow);
+		int cursorWidth = gp.tilesize;
+		int cursorHeight = gp.tilesize;
+		
+		//draw cursor
+		g2.setColor(Color.white);
+		g2.setStroke(new BasicStroke(3));
+		g2.drawRoundRect(cursorX, cursorY, cursorWidth, cursorHeight, 10, 10);
+	}
 	public void drawOptionScreen() {
 		g2.setColor(Color.white);
 		g2.setFont(g2.getFont().deriveFont(32F));
