@@ -27,7 +27,7 @@ public class assetSetter {
 		gp.obj[2] = new obj_chest_brown(gp);
 		gp.obj[2].worldX = 28*gp.tilesize;
 		gp.obj[2].worldY = 36*gp.tilesize;
-		
+	
 		gp.obj[3] = new obj_chestGold(gp);
 		gp.obj[3].worldX = 42*gp.tilesize;
 		gp.obj[3].worldY = 43*gp.tilesize;
@@ -35,7 +35,6 @@ public class assetSetter {
 		gp.obj[4] = new obj_chestGold(gp);
 		gp.obj[4].worldX = 27*gp.tilesize;
 		gp.obj[4].worldY = 12*gp.tilesize;
-		
 		
 	}
 	

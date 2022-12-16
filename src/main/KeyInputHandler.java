@@ -2,7 +2,6 @@ package main;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.nio.charset.CoderMalfunctionError;
 
 public class KeyInputHandler implements KeyListener{
 	
@@ -58,7 +57,6 @@ public class KeyInputHandler implements KeyListener{
 	}
 		
 
-		
 		//playstate
 		if(gp.gameState == gp.playState) {
 			
@@ -71,12 +69,15 @@ public class KeyInputHandler implements KeyListener{
 			}if(kode == KeyEvent.VK_D) {
 				RightFlag = true;
 			}if(kode == KeyEvent.VK_P) {
+				gp.playSE(7);
 				gp.gameState = gp.pauseState;
 			}if(kode == KeyEvent.VK_ENTER) {
 				enterPressed = true;
 			}if(kode == KeyEvent.VK_ESCAPE) {
+				gp.playSE(7);
 				gp.gameState = gp.optionState;
 			}if(kode == KeyEvent.VK_I) {
+				gp.playSE(7);
 				gp.gameState = gp.characterState;
 			}
 		}
@@ -84,6 +85,7 @@ public class KeyInputHandler implements KeyListener{
 		//pause state 
 		else if(gp.gameState == gp.pauseState) {
 			if(kode == KeyEvent.VK_P) {
+				gp.playSE(7);
 				gp.gameState = gp.playState;
 			}
 		}
@@ -97,6 +99,7 @@ public class KeyInputHandler implements KeyListener{
 		//options state
 		else if(gp.gameState == gp.optionState) {
 			if(kode == KeyEvent.VK_ESCAPE) {
+				gp.playSE(7);
 				gp.gameState = gp.playState;
 			}
 			if(kode == KeyEvent.VK_ENTER) {
@@ -123,6 +126,7 @@ public class KeyInputHandler implements KeyListener{
 		//character state
 		}else if (gp.gameState == gp.characterState) {
 			if(kode == KeyEvent.VK_I || kode == KeyEvent.VK_ESCAPE) {
+				gp.playSE(7);
 				gp.gameState = gp.playState;
 			}
 			if(kode == KeyEvent.VK_W) {

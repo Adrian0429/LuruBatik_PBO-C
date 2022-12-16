@@ -1,7 +1,5 @@
 package main;
 
-import javax.sql.rowset.CachedRowSet;
-
 import Entity.Entity;
 
 public class CollisionChecker {

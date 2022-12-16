@@ -3,17 +3,13 @@ package Entity;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InterruptedIOException;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
-import javax.management.ObjectName;
-
 import main.KeyInputHandler;
-import main.UtilityTool;
 import main.panelGame;
 import object.obj_chest_brown;
+import object.obj_key;
+
 
 public class Player extends Entity{
 
@@ -47,6 +43,7 @@ public class Player extends Entity{
 		
 		setDefaultValue();
 		getPlayerImage();
+		setItems();
 	}
 
 	
@@ -61,7 +58,11 @@ public class Player extends Entity{
 		life = maxLife;
 		
 	}
-	
+	public void setItems() {
+		inventory.add(new obj_key(gp));
+		inventory.add(new obj_key(gp));
+		inventory.add(new obj_chest_brown(gp));
+	}
 	public void getPlayerImage() {
 				
 	up1 = setup("/player/elf_back_walk1");
@@ -80,7 +81,6 @@ public class Player extends Entity{
 	menuSel = setup("/PictureStuff/scroll");
 
 	}
-	
 	
 	
 	public void update() {
@@ -122,15 +122,19 @@ public class Player extends Entity{
 				switch(direction) {
 				case "up":
 					worldY -= speed;
+					System.out.println("World Y : " + worldY + " World X : " + worldX);
 					break;
 				case "down":
 					worldY += speed;
+					System.out.println("World Y : " + worldY + " World X : " + worldX);
 					break;
 				case "left":
 					worldX -= speed;
+					System.out.println("World Y : " + worldY + " World X : " + worldX);
 					break;
 				case "right":
 					worldX += speed;
+					System.out.println("World Y : " + worldY + " World X : " + worldX);
 					break;
 				}
 			}

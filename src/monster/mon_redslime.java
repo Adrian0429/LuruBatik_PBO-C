@@ -1,7 +1,6 @@
 package monster;
 
 import java.util.Random;
-import java.util.jar.Attributes.Name;
 
 import Entity.Entity;
 import main.panelGame;

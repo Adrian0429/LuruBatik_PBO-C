@@ -7,17 +7,12 @@ import java.awt.FontFormatException;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.security.PublicKey;
 
-import javax.security.auth.x500.X500Principal;
-import javax.xml.transform.Templates;
-
-import object.SuperObject;
+import Entity.Entity;
 import object.obj_heart;
-import object.obj_key;
+
 
 public class UI {
 	panelGame gp;
@@ -46,7 +41,7 @@ public class UI {
 		}
 		
 		//CREATE HUD OBJECT
-		SuperObject heart = new obj_heart(gp);
+		Entity heart = new obj_heart(gp);
 		heart_full = heart.image;
 		heart_half = heart.image2;
 		heart_blank = heart.image3;
@@ -69,11 +64,11 @@ public class UI {
 		if(gp.gameState == gp.titleState) {
 			drawTitleScreen();
 		}
-		//playstate
+		//play state
 		if(gp.gameState == gp.playState) {
 			drawPlayerLife();
 		}
-		//pausestate
+		//pause state
 		if(gp.gameState == gp.pauseState) {
 			drawPlayerLife();
 			drawPauseScreen();
@@ -90,6 +85,7 @@ public class UI {
 		
 		//character state
 		if(gp.gameState == gp.characterState){
+			drawPlayerLife();
 			drawInventory();
 		}
 	}
@@ -99,13 +95,12 @@ public class UI {
 		int y = gp.tilesize / 2;
 		int i = 0;
 		
-		//DRAW MAX LIFE
+		//DRAW blank heart
 		while(i < gp.player.maxLife/2) {
 			g2.drawImage(heart_blank, x, y, null);
 			i++;
 			x += gp.tilesize;
 		}
-		
 		//RESET
 		x = gp.tilesize/2;
 		y = gp.tilesize /2;
@@ -113,10 +108,10 @@ public class UI {
 		
 		//DRAW CURRENT LIFE
 		while(i < gp.player.life) {
-			g2.drawImage(heart_blank, x, y, null);
+			g2.drawImage(heart_half, x, y, null);
 			i++;
 			if (i < gp.player.life) {
-				g2.drawImage(heart_blank, x, y, null);
+				g2.drawImage(heart_full, x, y, null);
 			}
 			i++;
 			x += gp.tilesize;
@@ -146,7 +141,7 @@ public class UI {
 		y += gp.tilesize*2;
 		g2.drawImage(gp.player.titlePict, x, y, gp.tilesize*2, gp.tilesize*2, null);
 		
-		//menu optionss
+		//menu options
 		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
 		
 		text = "NEW GAME";
@@ -245,6 +240,16 @@ public class UI {
 		int slotX = slotXstart;
 		int slotY = slotYstart;
 		
+		//draw player items
+		for(int i=0; i<gp.player.inventory.size();i++) {
+			g2.drawImage(gp.player.inventory.get(i).down1, slotX, slotY, null);
+			slotX += gp.tilesize;
+			
+			if(i == 4 || i == 9 || i == 14) {
+				slotX = slotXstart;
+				slotY += gp.tilesize;
+			}
+		}
 		//cursor
 		int cursorX = slotXstart + (gp.tilesize * slotCol);
 		int cursorY = slotYstart + (gp.tilesize * slotRow);
@@ -255,6 +260,33 @@ public class UI {
 		g2.setColor(Color.white);
 		g2.setStroke(new BasicStroke(3));
 		g2.drawRoundRect(cursorX, cursorY, cursorWidth, cursorHeight, 10, 10);
+		
+		//description frame
+		int dFrameX = frameX;
+		int dFrameY = frameY + frameHeight;
+		int dFrameWidth = frameWidth;
+		int dFrameHeight = gp.tilesize*3;
+		drawSubWindow(dFrameX, dFrameY, dFrameWidth, dFrameHeight);
+		
+		//write desc text
+		int textX = dFrameX + 20;
+		int textY = dFrameY + gp.tilesize-5;
+		g2.setFont(g2.getFont().deriveFont(10F));
+		
+		int itemIndex = getItemIndexOnSlot();
+		
+		if(itemIndex < gp.player.inventory.size()) {
+			
+			for(String line : gp.player.inventory.get(itemIndex).description.split("\n")) {
+				g2.drawString(line, textX, textY);
+				textY += 32;
+			}
+			
+		}
+	}
+	public int getItemIndexOnSlot() {
+		int itemIndex = slotCol + (slotRow * 5);
+		return itemIndex;
 	}
 	public void drawOptionScreen() {
 		g2.setColor(Color.white);

@@ -1,25 +1,15 @@
 package object;
 
-import javax.imageio.ImageIO;
-
+import Entity.Entity;
 import main.panelGame;
 
-public class obj_heart extends SuperObject {
-	panelGame gp;
-	
+public class obj_heart extends Entity {
+
 	public obj_heart(panelGame gp) {
-		this.gp = gp;
+		super(gp);
 		name = "Heart";
-		
-		try {
-//			image = ImageIO.read(null);
-//			image2 = ImageIO
-//			image3 = ;
-//			image = uTool.scaleImage(image, solidAreaDefY, solidAreaDefX);
-//			image2 = uTool.scaleImage(image, solidAreaDefY, solidAreaDefX);
-//			image3 = uTool;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+		image = setup("/objects/heart_full");
+		image2 = setup("/objects/heart_half");
+		image3 = setup("/objects/heart_blank");
+	}	
 }

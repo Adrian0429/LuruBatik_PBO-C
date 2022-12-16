@@ -1,25 +1,14 @@
 package object;
 
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
-
+import Entity.Entity;
 import main.panelGame;
 
-public class obj_key extends SuperObject{
-
-	panelGame gp;
-	
+public class obj_key extends Entity{
 	public obj_key(panelGame gp) {
-		
-		name = "key";
-		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/objects/01.png"));
-			uTool.scaleImage(image, gp.tilesize, gp.tilesize);
-		} catch (IOException e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
-	}
+		super(gp);
+		name = "KUNCI";
+		down1 = setup("/objects/01");
+		description = "[" + name + "]\nDigunakan untuk membuka \nchest dan pintu.";
+	}	
 }

@@ -1,12 +1,5 @@
 package Entity;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.Random;
-
-import javax.imageio.ImageIO;
-
-import main.UtilityTool;
 import main.panelGame;
 
 public class NPC_Bakul extends Entity {
