@@ -25,23 +25,28 @@ public class KeyInputHandler implements KeyListener{
 		
 		int kode = e.getKeyCode();
 		//title state
+
 		if(gp.gameState == gp.titleState) {
+			
 			if(kode == KeyEvent.VK_W) {
 				gp.ui.command--;
+				gp.playSE(3);
 				if(gp.ui.command < 0) {
 					gp.ui.command = 2;
 				}
 			}
 			if(kode == KeyEvent.VK_S) {
 				gp.ui.command++;
+				gp.playSE(3);
 				if(gp.ui.command > 2) {
 					gp.ui.command = 0;
 				}		
 		}
 			if(kode == KeyEvent.VK_ENTER) {
+				gp.playSE(3);
 				if(gp.ui.command == 0) {
 					gp.gameState = gp.playState;
-					gp.playMusic(0);
+					gp.playMusic(4);
 				}
 				if(gp.ui.command == 1) {
 			
@@ -87,7 +92,7 @@ public class KeyInputHandler implements KeyListener{
 				gp.gameState = gp.playState;
 			}
 		}
-		
+		//options state
 		else if(gp.gameState == gp.optionState) {
 			if(kode == KeyEvent.VK_ESCAPE) {
 				gp.gameState = gp.playState;
@@ -101,14 +106,14 @@ public class KeyInputHandler implements KeyListener{
 			}
 			if(kode == KeyEvent.VK_W) {
 				gp.ui.command--;
-				gp.playSE(9);
+				gp.playSE(3);
 				if(gp.ui.command < 0) {
 					gp.ui.command = maxCommand;
 				}
 			}
 			if(kode == KeyEvent.VK_S) {
 				gp.ui.command++;
-				gp.playSE(9);
+				gp.playSE(3);
 				if(gp.ui.command > maxCommand) {
 					gp.ui.command = 0;
 				}
