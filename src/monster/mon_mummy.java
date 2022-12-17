@@ -4,16 +4,15 @@ import java.util.Random;
 
 import Entity.Entity;
 import main.panelGame;
-import object.obj_scroll;
 
-public class mon_redslime extends Entity {
+public class mon_mummy extends Entity {
 
-	public mon_redslime(panelGame gp) {
+	public mon_mummy(panelGame gp) {
 		super(gp);
 		type = 2;
 		name = "Red Slime";
 		speed = 1;
-		maxLife = 4;
+		maxLife = 6;
 		life = maxLife;
 		direction = "down";
 
@@ -29,14 +28,14 @@ public class mon_redslime extends Entity {
 	}
 	
 	public void getImage() {
-		up1 = setup("/monster/redslime_down_1");
-		up2 = setup("/monster/redslime_down_2");
-		down1 = setup("/monster/redslime_down_1");
-		down2 = setup("/monster/redslime_down_2");
-		left1 = setup("/monster/redslime_down_1");
-		left2 = setup("/monster/redslime_down_2");
-		right1 = setup("/monster/redslime_down_1");
-		right2 = setup("/monster/redslime_down_2");
+		up1 = setup("/monster/mummy_up1");
+		up2 = setup("/monster/mummy_up2");
+		down1 = setup("/monster/mummy_down1");
+		down2 = setup("/monster/mummy_down2");
+		left1 = setup("/monster/mummy_left1");
+		left2 = setup("/monster/mummy_left2");
+		right1 = setup("/monster/mummy_right1");
+		right2 = setup("/monster/mummy_right2");
 	}
 	
 	public void setAction() {
@@ -57,13 +56,5 @@ public class mon_redslime extends Entity {
 			}
 			actionLockCounter = 0;
 		}
-	}
-	public void checkDrop() {
-		int i = new Random().nextInt(100) + 1;
-		
-		if(i < 50) {
-			dropItem(new obj_scroll(gp));
-		}
-		
 	}
 }

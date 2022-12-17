@@ -1,7 +1,10 @@
 package main;
 
 import Entity.NPC_Bakul;
+import Entity.NPC_Kakek;
+import monster.mon_mummy;
 import monster.mon_redslime;
+import monster.mon_wasp;
 import object.obj_chestGold;
 import object.obj_chest_brown;
 import object.obj_key;
@@ -42,6 +45,10 @@ public class assetSetter {
 		gp.npc[0] = new NPC_Bakul(gp);
 		gp.npc[0].worldX = 30*gp.tilesize;
 		gp.npc[0].worldY = 22*gp.tilesize;
+		
+		gp.npc[1] = new NPC_Kakek(gp);
+		gp.npc[1].worldX = 30*gp.tilesize;
+		gp.npc[1].worldY = 39*gp.tilesize;
 	}
 	
 	public void setMonster() {
@@ -52,6 +59,18 @@ public class assetSetter {
 		gp.monster[1] = new mon_redslime(gp);
 		gp.monster[1].worldX = gp.tilesize*23;
 		gp.monster[1].worldY = gp.tilesize*37;
+		
+		gp.monster[2] = new mon_redslime(gp);
+		gp.monster[2].worldX = gp.tilesize*41;
+		gp.monster[2].worldY = gp.tilesize*5;
+		
+		gp.monster[4] = new mon_mummy(gp);
+		gp.monster[4].worldX = gp.tilesize*25;
+		gp.monster[4].worldY = gp.tilesize*37;
+		
+		gp.monster[5] = new mon_wasp(gp);
+		gp.monster[5].worldX = gp.tilesize*27;
+		gp.monster[5].worldY = gp.tilesize*39;
 		
 	}
 }

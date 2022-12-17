@@ -171,7 +171,14 @@ public class panelGame extends JPanel implements Runnable{
 			}
 			for(int i = 0; i< monster.length; i++) {
 				if(monster[i] != null) {
-					monster[i].update();
+					if(monster[i].alive == true && monster[i].dying == false) {
+						monster[i].update();
+					}
+					if(monster[i].alive == false) {
+						monster[i].checkDrop();
+						monster[i] = null;
+					}
+					
 				}
 			}
 		}
@@ -206,6 +213,12 @@ public class panelGame extends JPanel implements Runnable{
 					entityList.add(obj[i]);
 				}
 			}
+			for(int i=0; i < monster.length ; i++) {
+				if(monster[i] != null) {
+					entityList.add(monster[i]);
+				}
+			}
+			
 			//sort
 			Collections.sort(entityList, new Comparator<Entity>() {
 
@@ -221,10 +234,9 @@ public class panelGame extends JPanel implements Runnable{
 				entityList.get(i).draw(g2);
 			}
 			//reset entity list
-			for(int i = 0; i<entityList.size();i++) {
-				entityList.remove(i);
-			}
+			entityList.clear();
 			
+			//ui
 			ui.draw(g2);
 		}
 	}	

@@ -1,9 +1,12 @@
 package Entity;
 
+import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+
+import javax.print.ServiceUIFactory;
 
 import main.KeyInputHandler;
 import main.panelGame;
@@ -41,9 +44,13 @@ public class Player extends Entity{
 		solidArea.width = 32;
 		solidArea.height = 32;
 		
+		attackArea.width = 36;
+		attackArea.height = 36;
+				
 		setDefaultValue();
 		getPlayerImage();
 		setItems();
+		getPlayerAttackImage();
 	}
 
 	
@@ -81,12 +88,22 @@ public class Player extends Entity{
 	menuSel = setup("/PictureStuff/scroll");
 
 	}
+	public void getPlayerAttackImage() {
+		attackDown1 = setup("/player/elf_attackdown_1");
+		attackDown2 = setup("/player/elf_attackdown_2");
+		attackLeft1 = setup("/player/elf_attackleft_1");
+		attackLeft2 = setup("/player/elf_attackleft_2");
+		attackRight1 = setup("/player/elf_attackright_1");
+		attackRight2 = setup("/player/elf_attackright_2");
+	}
 	
 	
 	public void update() {
-
-		if(KeyH.UpFlag == true || KeyH.DownFlag == true || KeyH.LeftFlag == true||
-				KeyH.RightFlag == true) {
+		if(attacking == true) {
+			attacking();
+		}
+		else if(KeyH.UpFlag == true || KeyH.DownFlag == true || KeyH.LeftFlag == true||
+				KeyH.RightFlag == true || KeyH.enterPressed == true) {
 		
 		
 			if(KeyH.UpFlag == true) {
@@ -104,7 +121,7 @@ public class Player extends Entity{
 			}
 			//check monster collision
 			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-			
+			contactMonster(monsterIndex);
 			//check tile collision 
 			collisionOn = false;
 			gp.cChecker.checkTile(this);
@@ -112,13 +129,13 @@ public class Player extends Entity{
 			
 			// check object collision 
 			int objIndex = gp.cChecker.checkObject(this, true);
-			pickupObject(objIndex);
+//			pickupObject(objIndex);
 			
 			//npc collision
 			int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
 			interactNPC(npcIndex);
 			//if collision false, player can move 
-			if(collisionOn == false) {
+			if(collisionOn == false && KeyH.enterPressed == false) {
 				switch(direction) {
 				case "up":
 					worldY -= speed;
@@ -138,7 +155,7 @@ public class Player extends Entity{
 					break;
 				}
 			}
-			
+			gp.KeyH.enterPressed = false;
 			
 			charcounter++;
 			if(charcounter > 10) {
@@ -154,51 +171,140 @@ public class Player extends Entity{
 				charcounter = 0;
 			}
 		}
-		
+		//invicible time player
+		if(invicible == true) {
+			invicibleCounter++;
+			if(invicibleCounter > 60) {
+				invicible = false;
+				invicibleCounter = 0;
+			}
+		}
 	}
-	
+	public void attacking() {
+		charcounter++;
+		if(charcounter <= 5) {
+			charnumber = 1;
+		}
+		if(charcounter > 5 && charcounter <= 25) {
+			charnumber = 2;
+			
+			int currentWorldX = worldX;
+			int currentWorldY = worldY;
+			int solidAreaWidth = solidArea.width;
+			int solidAreaHeight = solidArea.height;
+			
+			//adjust player worldX, worldY
+			switch(direction) {
+			case "up": worldY -= attackArea.height; break;
+			case "down" : worldY += attackArea.height;break;
+			case "left" : worldX -= attackArea.width; break;
+			case "right": worldX += attackArea.width; break;
+			}
+			
+			solidArea.width = attackArea.width;
+			solidArea.height = attackArea.height;
+			
+			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+			damageMonster(monsterIndex);
+			
+			worldX = currentWorldX;
+			worldY = currentWorldY;
+			solidArea.width = solidAreaWidth;
+			solidArea.height = solidAreaHeight;
+		}
+		if(charcounter > 25) {
+			charnumber = 1;
+			charcounter = 0;
+			attacking = false;
+		}
+	}
 	public void pickupObject(int i) {
 		
 		if(i != 999) {
-			
-			String objectName = gp.obj[i].name;
-			
-			switch(objectName) {
-			case "key": 
-				hasKey++;
-				gp.obj[i] =  null;
-				gp.playSE(1);
-				break;
-				
-			case "chest":
-				if(hasKey > 0) {
-					hasKey--;
-					gp.playSE(2);
-					gp.obj[i] = null;
-					break;	
-				}
-				
-			case "chest_gold":
-				if(hasKey > 0) {
-					hasKey--;
-					gp.playSE(2);
-					gp.obj[i] = null;
-					break;	
-				}
+			//pickup only item
+			if(gp.obj[i].type == type_pickuponly) {
+				gp.obj[i] = null;
 			}
+			//inventory item
+			else{
+				String text;
+				if(inventory.size() != inventorySize) {
+					inventory.add(gp.obj[i]);
+					gp.playSE(1);
+					text = "Got a " + gp.obj[i].name + "!";
+				}
+				else {
+					text = "Cannot carry anymore";
+				}
+				gp.obj[i] = null;
+			}
+			
 		}
+//		if(i != 999) {
+//			String objectName = gp.obj[i].name;
+//			
+//			switch(objectName) {
+//			case "KUNCI": 
+//				hasKey++;
+//				gp.obj[i] =  null;
+//				gp.playSE(1);
+//				break;
+//				
+//			case "Brown Chest":
+//				if(hasKey > 0) {
+//					hasKey--;
+//					gp.playSE(2);
+//					gp.obj[i] = null;
+//					break;	
+//				}
+//				
+//			case "Gold Chest":
+//				if(hasKey > 0) {
+//					hasKey--;
+//					gp.playSE(2);
+//					gp.obj[i] = null;
+//					break;	
+//				}
+//			}
+//		}
 	}
 	
 	public void interactNPC(int i) {
-		if(i != 999) {
-			
-			if(gp.KeyH.enterPressed == true) {
-				
+		if(gp.KeyH.enterPressed == true) {
+			if(i != 999) {
 				gp.gameState = gp.dialogueState;
 				gp.npc[i].speak();	
 			}
+			else {
+				gp.playSE(8);
+				attacking = true;
+			}
 		}
+		
 		gp.KeyH.enterPressed = false;
+	}
+	
+	public void contactMonster(int i) {
+		if (i != 999) {
+			if(invicible == false) {
+				gp.playSE(9);
+				life -= 1;
+				invicible = true;
+			}
+		}
+	}
+	public void damageMonster(int i) {
+		if(i != 999) {
+			if(gp.monster[i].invicible == false) {
+				gp.playSE(9);
+				gp.monster[i].life -= 1;
+				gp.monster[i].invicible = true;
+				
+				if(gp.monster[i].life <= 0) {
+					gp.monster[i].dying = true;
+				}
+			}
+		}
 	}
 	public void draw(Graphics2D g2) {
 		
@@ -209,52 +315,58 @@ public class Player extends Entity{
 		switch(direction){
 		
 		case "up":
-			if(charnumber == 1) {
-				image = up1;	
+			if(attacking ==  false) {
+				if(charnumber == 1) {image = up1;}
+				if(charnumber == 2) {image = up2;}
+				if(charnumber == 3) {image = up3;}
 			}
-			if(charnumber == 2) {
-				image = up2;
-			}
-			if(charnumber == 3) {
-				image = up3;
+			if(attacking == true) {
+				if(charnumber == 1) {image = up1;}
+				if(charnumber == 2) {image = up2;}
+				if(charnumber == 3) {image = up3;}
 			}
 			break;
 		case "down":
-			if(charnumber == 1) {
-				image = down1;	
+			if(attacking == false){
+				if(charnumber == 1) {image = down1;}
+				if(charnumber == 2) {image = down2;}
+				if(charnumber == 3) {image = down3;}
 			}
-			if(charnumber == 2) {
-				image = down2;
-			}
-			if(charnumber == 3) {
-				image = down3;
+			if(attacking == true) {
+				if(charnumber == 1) {image = attackDown1;}
+				if(charnumber == 2) {image = attackDown2;}
 			}
 			break;
 		case "left":
-			if(charnumber == 1) {
-				image = left1;	
+			if(attacking == false) {
+				if(charnumber == 1) {image = left1;}
+				if(charnumber == 2) {image = left2;}
+				if(charnumber == 3) {image = left3;}
 			}
-			if(charnumber == 2) {
-				image = left2;
-			}
-			if(charnumber == 3) {
-				image = left3;
+			if(attacking == true) {
+				if(charnumber == 1) {image = attackLeft1;}
+				if(charnumber == 2) {image = attackLeft2;}
 			}
 			break;
 		case "right":
-			if(charnumber == 1) {
-				image = right1;	
+			if(attacking == false) {
+				if(charnumber == 1) {image = right1;}
+				if(charnumber == 2) {image = right2;}
+				if(charnumber == 3) {image = right3;}
 			}
-			if(charnumber == 2) {
-				image = right2;
-			}
-			if(charnumber == 3) {
-				image = right3;
+			if(attacking == true) {
+				if(charnumber == 1) {image = attackRight1;}
+				if(charnumber == 2) {image = attackRight2;}
 			}
 			break;
 		}
+		if(invicible == true) {
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
+		}
 		g2.drawImage(image, screenX, screenY, gp.tilesize, gp.tilesize, null);
 		
+		//reset alpha
+		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 	}
 	
 

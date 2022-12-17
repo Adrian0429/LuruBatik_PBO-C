@@ -55,10 +55,9 @@ public class KeyInputHandler implements KeyListener{
 				}
 			}
 	}
-		
 
 		//playstate
-		if(gp.gameState == gp.playState) {
+		else if(gp.gameState == gp.playState) {
 			
 			if(kode == KeyEvent.VK_W) {
 				UpFlag = true;
