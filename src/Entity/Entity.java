@@ -43,8 +43,8 @@ public class Entity {
 	public BufferedImage image, image2, image3;
 	public String name;
 	public boolean collision = false;
-	public int type;
-	public int type_pickuponly;
+	public int type = 0;
+	public int type_pickuponly = 1;
 	
 	//CHARACTER STATUS
 	public boolean alive = true;
@@ -217,6 +217,7 @@ public class Entity {
 					hpBarOn = false;
 				}
 			}
+			
 			if(invicible == true) {
 				hpBarOn = true;
 				hpBarCounter = 0;
@@ -238,30 +239,21 @@ public class Entity {
 		dyingCounter++;
 		
 		if(dyingCounter <= 5) {
-			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0f));
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 		}
 		if(dyingCounter > 5 && dyingCounter <= 10) {
-			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0f));
 		}
 		if(dyingCounter > 10 && dyingCounter <= 15) {
-			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0f));
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 		}
 		if(dyingCounter > 15 && dyingCounter <= 20) {
-			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0f));
 		}
 		if(dyingCounter > 20 && dyingCounter <= 25) {
-			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0f));
-		}
-		if(dyingCounter > 25 && dyingCounter <= 30) {
 			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 		}
-		if(dyingCounter > 30 && dyingCounter <= 35) {
-			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0f));
-		}
-		if(dyingCounter > 35 && dyingCounter <= 40) {
-			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
-		}
-		if(dyingCounter > 40) {
+		if(dyingCounter > 25) {
 			dying = false;
 			alive = false;
 		}

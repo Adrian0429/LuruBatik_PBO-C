@@ -45,7 +45,7 @@ public class EventHandler {
     	
     	if(canTouchEvent == true) {
     		 if(hit(1,20, "left") == true) {cactusHit(1,20,gp.dialogueState);}
-    	        
+    		 
     	        if(hit(8,21,"left") == true){cactusHit(8,21,gp.dialogueState);  }
     	   
     	        if(hit(5,20,"left") == true){cactusHit(5,20,gp.dialogueState);}
@@ -96,7 +96,7 @@ public class EventHandler {
         eventRect[col][row].y = row * gp.tilesize + eventRect[col][row].y;
 
         if(gp.player.solidArea.intersects(eventRect[col][row]) && eventRect[col][row].eventDone == false) {
-            if(gp.player.direction.contentEquals(reqDirection) || reqDirection.contentEquals("left") || reqDirection.contentEquals("right")|| reqDirection.contentEquals("up")){
+            if(gp.player.direction.contentEquals(reqDirection) || reqDirection.contentEquals("right")|| reqDirection.contentEquals("up") || reqDirection.contentEquals("down")){
                 hit = true; 
                 
                 previousEventX = gp.player.worldX;
@@ -117,13 +117,13 @@ public class EventHandler {
     	gp.ui.currentDialogue = "You fall into a pit!";
     	gp.player.life -= 1;
     	eventRect[col][row].eventDone = true;
-    	
     	canTouchEvent = false;
     }
     
     public void cactusHit (int col, int row, int gameState) {
     	gp.gameState = gameState;
     	gp.ui.currentDialogue = "ouch, its a cactus!";
+    	gp.playSE(9);
     	gp.player.life -= 1;
     	canTouchEvent = false;
     }

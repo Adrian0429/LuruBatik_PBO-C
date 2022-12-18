@@ -30,12 +30,16 @@ public class mon_mummy extends Entity {
 	public void getImage() {
 		up1 = setup("/monster/mummy_up1");
 		up2 = setup("/monster/mummy_up2");
+		up3 = setup("/monster/mummy_up3");
 		down1 = setup("/monster/mummy_down1");
 		down2 = setup("/monster/mummy_down2");
+		down3 = setup("/monster/mummy_down3");
 		left1 = setup("/monster/mummy_left1");
 		left2 = setup("/monster/mummy_left2");
+		left2 = setup("/monster/mummy_left3");
 		right1 = setup("/monster/mummy_right1");
 		right2 = setup("/monster/mummy_right2");
+		right3 = setup("/monster/mummy_right3");
 	}
 	
 	public void setAction() {

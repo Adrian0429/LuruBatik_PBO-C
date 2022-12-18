@@ -17,18 +17,18 @@ public class NPC_Bakul extends Entity {
 	
 	public void getImage() {
 		
-	up1 = setup("/npc/up1");
-	up2 = setup("/npc/up2");
-	up3 =setup("/npc/up3");
-	down1 = setup("/npc/down1");
-	down2 = setup("/npc/down2");
-	down3 = setup("/npc/down3");
-	right1 = setup("/npc/right1");
-	right2 = setup("/npc/right2");
-	right3 = setup("/npc/right3");
-	left1 = setup("/npc/left1");
-	left2 = setup("/npc/left2");
-	left3 = setup("/npc/left3");
+	up1 = setup("/npc/npc1");
+	up2 = setup("/npc/npc2");
+	up3 =setup("/npc/npc3");
+	down1 = setup("/npc/npc1");
+	down2 = setup("/npc/npc2");
+	down3 = setup("/npc/npc3");
+	right1 = setup("/npc/npc1");
+	right2 = setup("/npc/npc2");
+	right3 = setup("/npc/npc3");
+	left1 = setup("/npc/npc1");
+	left2 = setup("/npc/npc2");	
+	left3 = setup("/npc/npc3");
 
 	}
 	

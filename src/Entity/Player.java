@@ -65,11 +65,9 @@ public class Player extends Entity{
 		life = maxLife;
 		
 	}
-
 	public void setItems() {
-		inventory.add(new obj_key(gp));
-		inventory.add(new obj_key(gp));
-		inventory.add(new obj_chest_brown(gp));
+	
+	
 	}
 	public void getPlayerImage() {
 				
@@ -128,7 +126,7 @@ public class Player extends Entity{
 			
 			// check object collision 
 			int objIndex = gp.cChecker.checkObject(this, true);
-//			pickupObject(objIndex);
+			pickupObject(objIndex);
 			
 			//npc collision
 			int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
@@ -258,42 +256,16 @@ public class Player extends Entity{
 					inventory.add(gp.obj[i]);
 					gp.playSE(1);
 					text = "Got a " + gp.obj[i].name + "!";
+					gp.obj[i] = null;
 				}
 				else {
 					text = "Cannot carry anymore";
 				}
-				gp.obj[i] = null;
 			}
 			
 		}
-//		if(i != 999) {
-//			String objectName = gp.obj[i].name;
-//			
-//			switch(objectName) {
-//			case "KUNCI": 
-//				hasKey++;
-//				gp.obj[i] =  null;
-//				gp.playSE(1);
-//				break;
-//				
-//			case "Brown Chest":
-//				if(hasKey > 0) {
-//					hasKey--;
-//					gp.playSE(2);
-//					gp.obj[i] = null;
-//					break;	
-//				}
-//				
-//			case "Gold Chest":
-//				if(hasKey > 0) {
-//					hasKey--;
-//					gp.playSE(2);
-//					gp.obj[i] = null;
-//					break;	
-//				}
-//			}
-//		}
 	}
+	
 	
 	public void interactNPC(int i) {
 		if(gp.KeyH.enterPressed == true) {
@@ -318,6 +290,7 @@ public class Player extends Entity{
 			}
 		}
 	}
+	
 	public void damageMonster(int i) {
 		if(i != 999) {
 			if(gp.monster[i].invicible == false) {

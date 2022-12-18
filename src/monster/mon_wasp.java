@@ -30,12 +30,16 @@ public class mon_wasp extends Entity {
 	public void getImage() {
 		up1 = setup("/monster/wasp_idle1");
 		up2 = setup("/monster/wasp_idle2");
+		up3 = setup("/monster/wasp_idle2");
 		down1 = setup("/monster/wasp_walk1");
 		down2 = setup("/monster/wasp_walk2");
+		down3 = setup("/monster/wasp_walk2");
 		left1 = setup("/monster/wasp_walk1");
 		left2 = setup("/monster/wasp_walk2");
+		left3 = setup("/monster/wasp_walk2");
 		right1 = setup("/monster/wasp_walk1");
 		right2 = setup("/monster/wasp_walk2");
+		right3 = setup("/monster/wasp_walk2");
 	}
 	
 	public void setAction() {

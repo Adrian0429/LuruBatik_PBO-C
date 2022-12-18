@@ -53,24 +53,41 @@ public class assetSetter {
 	
 	public void setMonster() {
 		gp.monster[0] = new mon_redslime(gp);
-		gp.monster[0].worldX = gp.tilesize*23;
-		gp.monster[0].worldY = gp.tilesize*36;
+		gp.monster[0].worldX = gp.tilesize*19;
+		gp.monster[0].worldY = gp.tilesize*34;
 		
 		gp.monster[1] = new mon_redslime(gp);
-		gp.monster[1].worldX = gp.tilesize*23;
-		gp.monster[1].worldY = gp.tilesize*37;
+		gp.monster[1].worldX = gp.tilesize*46;
+		gp.monster[1].worldY = gp.tilesize*14;
 		
 		gp.monster[2] = new mon_redslime(gp);
 		gp.monster[2].worldX = gp.tilesize*41;
 		gp.monster[2].worldY = gp.tilesize*5;
 		
 		gp.monster[4] = new mon_mummy(gp);
-		gp.monster[4].worldX = gp.tilesize*25;
-		gp.monster[4].worldY = gp.tilesize*37;
+		gp.monster[4].worldX = gp.tilesize*2;
+		gp.monster[4].worldY = gp.tilesize*23;
 		
-		gp.monster[5] = new mon_wasp(gp);
-		gp.monster[5].worldX = gp.tilesize*27;
-		gp.monster[5].worldY = gp.tilesize*39;
+		gp.monster[5] = new mon_mummy(gp);
+		gp.monster[5].worldX = gp.tilesize*1;
+		gp.monster[5].worldY = gp.tilesize*30;
+		
+		gp.monster[6] = new mon_mummy(gp);
+		gp.monster[6].worldX = gp.tilesize*4;
+		gp.monster[6].worldY = gp.tilesize*42;
+		
+		gp.monster[7] = new mon_wasp(gp);
+		gp.monster[7].worldX = gp.tilesize*2;
+		gp.monster[7].worldY = gp.tilesize*13;
+		
+		gp.monster[8] = new mon_wasp(gp);
+		gp.monster[8].worldX = gp.tilesize*15;
+		gp.monster[8].worldY = gp.tilesize*3;
+		
+		gp.monster[9] = new mon_wasp(gp);
+		gp.monster[9].worldX = gp.tilesize*13;
+		gp.monster[9].worldY = gp.tilesize*14;
+		
 		
 	}
 }
