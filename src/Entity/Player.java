@@ -61,7 +61,7 @@ public class Player extends Entity{
 		direction = "down";
 		
 		//PLAYER STATUS
-		maxLife = 6;
+		maxLife = 10;
 		life = maxLife;
 		
 	}
@@ -245,7 +245,9 @@ public class Player extends Entity{
 		
 		if(i != 999) {
 			//pickup only item
-			if(gp.obj[i].type == type_pickuponly) {
+			if(gp.obj[i].type == 6) {
+				inventory.add(gp.obj[i]);
+				gp.playSE(1);
 				gp.obj[i] = null;
 			}
 			

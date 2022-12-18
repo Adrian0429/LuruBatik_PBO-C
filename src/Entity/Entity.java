@@ -6,7 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.GregorianCalendar;
+
 
 import javax.imageio.ImageIO;
 
@@ -239,19 +239,19 @@ public class Entity {
 		dyingCounter++;
 		
 		if(dyingCounter <= 5) {
-			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0f));
 		}
 		if(dyingCounter > 5 && dyingCounter <= 10) {
-			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0f));
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 		}
 		if(dyingCounter > 10 && dyingCounter <= 15) {
-			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
-		}
-		if(dyingCounter > 15 && dyingCounter <= 20) {
 			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0f));
 		}
-		if(dyingCounter > 20 && dyingCounter <= 25) {
+		if(dyingCounter > 15 && dyingCounter <= 20) {
 			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+		}
+		if(dyingCounter > 20 && dyingCounter <= 25) {
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0f));
 		}
 		if(dyingCounter > 25) {
 			dying = false;

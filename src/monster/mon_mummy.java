@@ -12,7 +12,7 @@ public class mon_mummy extends Entity {
 		type = 2;
 		name = "Mummy";
 		speed = 1;
-		maxLife = 6;
+		maxLife = 4;
 		life = maxLife;
 		direction = "down";
 

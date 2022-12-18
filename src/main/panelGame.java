@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import javax.swing.JPanel;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
 
 import Entity.Entity;
 import Entity.Player;
@@ -41,7 +42,8 @@ public class panelGame extends JPanel implements Runnable{
 	//WORLD SETTINGS 
 	public final int maxWorldCol = 50;
 	public final int maxWorldRow = 50;
-	
+	public final int maxMap = 10;
+	public int currentMap = 0;
 	//GAME STATE
 	public int gameState;
 	public final int titleState = 0;
@@ -112,6 +114,9 @@ public class panelGame extends JPanel implements Runnable{
 		player.setDefaultValue();
 		player.setDefaultPosition();
 		player.restoreLife();
+		aSetter.setObject();
+		aSetter.setNPC();
+		aSetter.setMonster();
 	}
 
 	public void setFullScreen() {

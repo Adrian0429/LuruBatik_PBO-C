@@ -29,8 +29,8 @@ public class CollisionChecker {
 		
 		case "up" :
 			entityTopRow = (entityTopWorldY - entity.speed) /gp.tilesize;
-			tilenum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
-			tilenum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
+			tilenum1 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityTopRow];
+			tilenum2 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityTopRow];
 			if(gp.tileM.tile[tilenum1].collision == true || gp.tileM.tile[tilenum2].collision == true) {
 				entity.collisionOn = true;
 			}
@@ -38,24 +38,24 @@ public class CollisionChecker {
 		case "down":
 			
 			entityBottomRow = (entityBottomWorldY + entity.speed)/ gp.tilesize;
-			tilenum1 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
-			tilenum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
+			tilenum1 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityBottomRow];
+			tilenum2 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityBottomRow];
 			if(gp.tileM.tile[tilenum1].collision == true || gp.tileM.tile[tilenum2].collision == true) {
 				entity.collisionOn = true;
 			}
 			break;
 		case "left":
 			entityLeftCol = (entityLeftWorldX - entity.speed)/gp.tilesize;
-			tilenum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
-			tilenum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
+			tilenum1 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityTopRow];
+			tilenum2 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityBottomRow];
 			if(gp.tileM.tile[tilenum1].collision == true || gp.tileM.tile[tilenum2].collision == true) {
 				entity.collisionOn = true;
 			}
 			break;
 		case "right":
 			entityRightCol = (entityRightWorldX + entity.speed) / gp.tilesize;
-			tilenum1 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
-			tilenum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
+			tilenum1 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityTopRow];
+			tilenum2 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityBottomRow];
 			if(gp.tileM.tile[tilenum1].collision == true || gp.tileM.tile[tilenum2].collision == true) {
 				entity.collisionOn = true;
 			}

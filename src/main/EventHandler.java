@@ -122,7 +122,7 @@ public class EventHandler {
     
     public void cactusHit (int col, int row, int gameState) {
     	gp.gameState = gameState;
-    	gp.ui.currentDialogue = "ouch, its a cactus!";
+    	gp.ui.currentDialogue = "Ouch, it's a cactus!";
     	gp.playSE(9);
     	gp.player.life -= 1;
     	canTouchEvent = false;
@@ -130,6 +130,7 @@ public class EventHandler {
     
     public void healingPool(int col, int row, int gameState) {
     	if(gp.KeyH.enterPressed == true) {
+    		gp.playSE(11);
     		gp.gameState = gameState;
     		gp.ui.currentDialogue = "You drink the water";
     		gp.player.life = gp.player.maxLife;
