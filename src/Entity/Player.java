@@ -120,9 +120,7 @@ public class Player extends Entity{
 				direction = "right";
 				
 			}
-			//check monster collision
-			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-			contactMonster(monsterIndex);
+
 			//check tile collision 
 			collisionOn = false;
 			gp.cChecker.checkTile(this);
@@ -135,6 +133,16 @@ public class Player extends Entity{
 			//npc collision
 			int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
 			interactNPC(npcIndex);
+			
+			//check monster collision
+			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+			contactMonster(monsterIndex);
+			
+			//check event
+			gp.eHandler.checkEvent();
+			
+			gp.KeyH.enterPressed = false;
+			
 			//if collision false, player can move 
 			if(collisionOn == false && KeyH.enterPressed == false) {
 				switch(direction) {
@@ -186,11 +194,13 @@ public class Player extends Entity{
 			gp.playSE(10);
 		}
 	}
+	
 	public void setDefaultPosition() {
 		worldX = gp.tilesize * 24;
 		worldY = gp.tilesize * 44;
 		direction = "down";
 	}
+	
 	public void restoreLife() {
 		life = maxLife;
 		invicible = false;
@@ -240,6 +250,7 @@ public class Player extends Entity{
 			if(gp.obj[i].type == type_pickuponly) {
 				gp.obj[i] = null;
 			}
+			
 			//inventory item
 			else{
 				String text;
@@ -295,8 +306,7 @@ public class Player extends Entity{
 				attacking = true;
 			}
 		}
-		
-		gp.KeyH.enterPressed = false;
+
 	}
 	
 	public void contactMonster(int i) {

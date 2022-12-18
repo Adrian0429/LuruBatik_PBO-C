@@ -208,16 +208,22 @@ public class panelGame extends JPanel implements Runnable{
 			//add entity to list
 			entityList.add(player);
 			
+			//render NPC
 			for(int i=0; i < npc.length;i++) {
 				if(npc[i] != null) {
 					entityList.add(npc[i]);
 				}
 			}
+			
+			
+			//render object
 			for(int i=0; i < obj.length ; i++) {
 				if(obj[i] != null) {
 					entityList.add(obj[i]);
 				}
 			}
+			
+			// render monster
 			for(int i=0; i < monster.length ; i++) {
 				if(monster[i] != null) {
 					entityList.add(monster[i]);
@@ -239,7 +245,9 @@ public class panelGame extends JPanel implements Runnable{
 				entityList.get(i).draw(g2);
 			}
 			//reset entity list
-			entityList.clear();
+			for(int i = 0; i<entityList.size();i++) {
+				entityList.remove(i);
+			}
 			
 			//ui
 			ui.draw(g2);

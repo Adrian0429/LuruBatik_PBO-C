@@ -131,7 +131,6 @@ public class CollisionChecker {
 				target[i].solidArea.y = target[i].worldY + target[i].solidArea.y;
 				
 				switch (entity.direction) {
-				
 				case "up" :
 					entity.solidArea.y -= entity.speed;
 					break;
@@ -154,8 +153,8 @@ public class CollisionChecker {
 						entity.collisionOn = true;
 						index = i;
 					}
-
 				}
+				
 				entity.solidArea.x = entity.solidAreaDefX;
 				entity.solidArea.y = entity.solidAreaDefY;
 				target[i].solidArea.x = target[i].solidAreaDefX;

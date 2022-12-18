@@ -10,7 +10,7 @@ public class mon_mummy extends Entity {
 	public mon_mummy(panelGame gp) {
 		super(gp);
 		type = 2;
-		name = "Red Slime";
+		name = "Mummy";
 		speed = 1;
 		maxLife = 6;
 		life = maxLife;
