@@ -88,8 +88,48 @@ public class UI {
 			drawPlayerLife();
 			drawInventory();
 		}
+		// game over state
+		if(gp.gameState == gp.gameOverState) {
+			drawGameOverScreen();
+		}
 	}
-	
+	public void drawGameOverScreen() {
+		g2.setColor(new Color(0,0,0,150));
+		g2.fillRect(0, 0, gp.panjangScreen, gp.TinggiScreen);
+		int x;
+		int y;
+		String text;
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD,90F));
+		
+		text = "GAME OVER";
+		g2.setColor(Color.BLACK);
+		x = getXforCenteredText(text);
+		y = gp.tilesize*5;
+		g2.drawString(text, x, y);
+		
+		// main
+		g2.setColor(Color.white);
+		g2.drawString(text, x-4, y-4);
+		
+		//retry
+		g2.setFont(g2.getFont().deriveFont(50f));
+		text = "Retry";
+		x = getXforCenteredText(text);
+		y = gp.tilesize * 7;
+		g2.drawString(text, x, y);
+		if(command == 0) {
+			g2.drawString(">", x-40, y);
+		}
+		
+		//title screen
+		text = "Quit";
+		x = getXforCenteredText(text);
+		y += 65;
+		g2.drawString(text, x, y);
+		if(command == 1) {
+			g2.drawString(">", x-40, y);
+		}
+	}
 	public void drawPlayerLife() {
 		int x = gp.tilesize / 2;
 		int y = gp.tilesize / 2;
@@ -344,5 +384,6 @@ public class UI {
 			g2.drawString(">", textX-25, textY);
 		}
 	}
+	
 }
 

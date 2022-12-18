@@ -50,7 +50,7 @@ public class panelGame extends JPanel implements Runnable{
 	public final int dialogueState = 3;
 	public final int optionState = 5;
 	public final int characterState = 6;
-	
+	public final int gameOverState = 7;
 	int FPS = 60;
 	
 	TileManager tileM = new TileManager(this);
@@ -108,7 +108,12 @@ public class panelGame extends JPanel implements Runnable{
 //		setFullScreen();
 		
 	}
-	
+	public void retry() {
+		player.setDefaultValue();
+		player.setDefaultPosition();
+		player.restoreLife();
+	}
+
 	public void setFullScreen() {
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice gd = ge.getDefaultScreenDevice();

@@ -46,9 +46,9 @@ public class assetSetter {
 		gp.npc[0].worldX = 30*gp.tilesize;
 		gp.npc[0].worldY = 22*gp.tilesize;
 		
-		gp.npc[1] = new NPC_Kakek(gp);
-		gp.npc[1].worldX = 30*gp.tilesize;
-		gp.npc[1].worldY = 39*gp.tilesize;
+//		gp.npc[1] = new NPC_Kakek(gp);
+//		gp.npc[1].worldX = 30*gp.tilesize;
+//		gp.npc[1].worldY = 39*gp.tilesize;
 	}
 	
 	public void setMonster() {

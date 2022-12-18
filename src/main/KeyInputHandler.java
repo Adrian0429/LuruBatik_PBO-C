@@ -2,6 +2,7 @@ package main;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.nio.charset.CoderMalfunctionError;
 
 public class KeyInputHandler implements KeyListener{
 	
@@ -120,6 +121,33 @@ public class KeyInputHandler implements KeyListener{
 				gp.playSE(3);
 				if(gp.ui.command > maxCommand) {
 					gp.ui.command = 0;
+				}
+			}
+		}else if(gp.gameState == gp.gameOverState) {
+			if(kode == KeyEvent.VK_W) {
+				gp.ui.command--;
+				if(gp.ui.command < 0) {
+					gp.ui.command = 1;
+				}
+				gp.playSE(3);
+			}
+			if(kode == KeyEvent.VK_S) {
+				gp.ui.command++;
+				if(gp.ui.command > 1) {
+					gp.ui.command = 0;
+				}
+				gp.playSE(3);
+			}
+			if(kode == KeyEvent.VK_ENTER) {
+				if(gp.ui.command == 0) {
+					gp.gameState = gp.playState;
+					gp.retry();
+					gp.playSE(4);
+				}
+				else if(gp.ui.command == 1) {
+					gp.gameState = gp.titleState;
+					gp.retry();
+					
 				}
 			}
 		//character state

@@ -65,6 +65,7 @@ public class Player extends Entity{
 		life = maxLife;
 		
 	}
+
 	public void setItems() {
 		inventory.add(new obj_key(gp));
 		inventory.add(new obj_key(gp));
@@ -179,6 +180,20 @@ public class Player extends Entity{
 				invicibleCounter = 0;
 			}
 		}
+		if(life <= 0) {
+			gp.gameState = gp.gameOverState;
+			gp.stopMusic();
+			gp.playSE(10);
+		}
+	}
+	public void setDefaultPosition() {
+		worldX = gp.tilesize * 24;
+		worldY = gp.tilesize * 44;
+		direction = "down";
+	}
+	public void restoreLife() {
+		life = maxLife;
+		invicible = false;
 	}
 	public void attacking() {
 		charcounter++;
