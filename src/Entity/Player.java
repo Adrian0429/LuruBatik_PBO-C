@@ -26,7 +26,7 @@ public class Player extends Entity{
 	public int solidAreaDefaultY;
 	public ArrayList <Entity> inventory = new ArrayList<>();
 	public final int inventorySize = 20;
-	public int batikCounter = 5;
+	public int batikCounter = 1;
 	
 	public Player(panelGame gp, KeyInputHandler keyH) {
 		
@@ -314,6 +314,8 @@ public class Player extends Entity{
 			}
 		}
 	}
+	
+	
 	public void draw(Graphics2D g2) {
 		
 		//g2.setColor(Color.white);
@@ -368,6 +370,7 @@ public class Player extends Entity{
 			}
 			break;
 		}
+		
 		if(invicible == true) {
 			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
 		}

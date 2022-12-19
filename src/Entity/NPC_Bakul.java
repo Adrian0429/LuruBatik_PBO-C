@@ -43,21 +43,6 @@ public class NPC_Bakul extends Entity {
 	
 	public void setAction() {
 		
-		//actionLockCounter++;
-		//
-		//if(actionLockCounter == 20) {
-		//	
-		//	Random rand = new Random();
-		//	int i = rand.nextInt(20)+1;
-		//	
-		//	if(i <= 10) {
-		//		direction = "up";
-		//	}if(i> 10 && i <= 20) {
-		//		direction = "down";
-		//	}
-		//	actionLockCounter = 0;
-		//}
-		//
 	}
 	
 	public void speak() {
