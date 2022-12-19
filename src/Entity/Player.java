@@ -56,8 +56,10 @@ public class Player extends Entity{
 
 	
 	public void setDefaultValue() {
-		worldX = gp.tilesize * 24;
-		worldY = gp.tilesize * 44;
+//		worldX = gp.tilesize * 24;
+//		worldY = gp.tilesize * 44;
+		worldX = gp.tilesize * 30;
+		worldY = gp.tilesize * 25;
 		speed = 4;
 		direction = "down";
 		
@@ -242,24 +244,35 @@ public class Player extends Entity{
 			attacking = false;
 		}
 	}
+	
 	public void pickupObject(int i) {
 		
 		if(i != 999) {
 			//pickup only item
-			if(gp.obj[i].type == 6) {
+			if(gp.obj[gp.currentMap][i].type == 6) {
 				batikCounter++;
-				inventory.add(gp.obj[i]);
+				inventory.add(gp.obj[gp.currentMap][i]);
 				gp.playSE(1);
-				gp.obj[i] = null;
+				gp.obj[gp.currentMap][i] = null;
+			}else if(gp.obj[gp.currentMap][i].type == 5) {
+				hasKey++;
+				inventory.add(gp.obj[gp.currentMap][i]);
+				gp.playSE(1);
+				gp.obj[gp.currentMap][i] = null;
+			}else if(gp.obj[gp.currentMap][i].type == 4) {
+				hasKey--;
+				batikCounter++;
+				gp.playSE(1);
+				gp.obj[gp.currentMap][i] = null;
 			}
 			
 			//inventory item
 			else{
 				String text;
 				if(inventory.size() != inventorySize) {
-					inventory.add(gp.obj[i]);
+					inventory.add(gp.obj[gp.currentMap][i]);
 					gp.playSE(1);
-					text = "Got a " + gp.obj[i].name + "!";
+					text = "Got a " + gp.obj[gp.currentMap][i].name + "!";
 					gp.obj[i] = null;
 				}
 				else {
@@ -281,7 +294,7 @@ public class Player extends Entity{
 			if(i != 999) {
 				
 				gp.gameState = gp.dialogueState;
-				gp.npc[i].speak();	
+				gp.npc[gp.currentMap][i].speak();	
 			}
 			else {
 				gp.playSE(8);
@@ -303,13 +316,13 @@ public class Player extends Entity{
 	
 	public void damageMonster(int i) {
 		if(i != 999) {
-			if(gp.monster[i].invicible == false) {
+			if(gp.monster[gp.currentMap][i].invicible == false) {
 				gp.playSE(9);
-				gp.monster[i].life -= 1;
-				gp.monster[i].invicible = true;
+				gp.monster[gp.currentMap][i].life -= 1;
+				gp.monster[gp.currentMap][i].invicible = true;
 				
-				if(gp.monster[i].life <= 0) {
-					gp.monster[i].dying = true;
+				if(gp.monster[gp.currentMap][i].life <= 0) {
+					gp.monster[gp.currentMap][i].dying = true;
 				}
 			}
 		}

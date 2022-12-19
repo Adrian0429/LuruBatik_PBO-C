@@ -80,6 +80,14 @@ public class KeyInputHandler implements KeyListener{
 				gp.playSE(7);
 				gp.gameState = gp.characterState;
 			}
+			
+			//debug
+			if(kode == KeyEvent.VK_R) {
+				switch (gp.currentMap) {
+				case 0: gp.tileM.loadMap("/maps/map50.txt",0);
+				case 1: gp.tileM.loadMap("/maps/MapRumah.txt", 1);
+				}
+			}
 		}
 		
 		//pause state 
