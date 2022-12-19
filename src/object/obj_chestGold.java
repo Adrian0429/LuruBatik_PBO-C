@@ -11,6 +11,7 @@ public class obj_chestGold extends Entity{
 		name = "Gold Chest";
 		down1 = setup("/objects/chest_3");
 		collision = true;
+		description = "[" + name + "]\nDigunakan untuk mendapat\nhadiah emas";
 	}
 
 }

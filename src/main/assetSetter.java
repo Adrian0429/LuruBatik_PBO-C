@@ -43,8 +43,8 @@ public class assetSetter {
 	
 	public void setNPC() {
 		gp.npc[0] = new NPC_Bakul(gp);
-		gp.npc[0].worldX = 26*gp.tilesize;
-		gp.npc[0].worldY = 40*gp.tilesize;
+		gp.npc[0].worldX = 25*gp.tilesize;
+		gp.npc[0].worldY = 39*gp.tilesize;
 		
 //		gp.npc[1] = new NPC_Kakek(gp);
 //		gp.npc[1].worldX = 30*gp.tilesize;

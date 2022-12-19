@@ -26,7 +26,7 @@ public class Player extends Entity{
 	public int solidAreaDefaultY;
 	public ArrayList <Entity> inventory = new ArrayList<>();
 	public final int inventorySize = 20;
-	public int batikCounter = 0;
+	public int batikCounter = 5;
 	
 	public Player(panelGame gp, KeyInputHandler keyH) {
 		
@@ -268,12 +268,18 @@ public class Player extends Entity{
 			}
 			System.out.println("Batik Counter : " + batikCounter);
 		}
+		if(batikCounter == 5) {
+			gp.gameState = gp.endingScreenState;
+			gp.playSE(12);
+		}
 	}
 	
 	
 	public void interactNPC(int i) {
 		if(gp.KeyH.enterPressed == true) {
+			gp.playSE(6);
 			if(i != 999) {
+				
 				gp.gameState = gp.dialogueState;
 				gp.npc[i].speak();	
 			}

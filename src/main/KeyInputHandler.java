@@ -205,7 +205,19 @@ public class KeyInputHandler implements KeyListener{
 				}
 
 			}
+		}else if(gp.gameState == gp.endingScreenState) {
+			if(kode == KeyEvent.VK_ENTER) {
+				if(gp.ui.command == 0) {
+					gp.retry();
+					gp.stopMusic();
+					gp.gameState = gp.titleState;
+
+				}
+
+				
+			}
 		}
+		
 	}
 
 	@Override
