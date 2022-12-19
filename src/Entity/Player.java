@@ -26,6 +26,7 @@ public class Player extends Entity{
 	public int solidAreaDefaultY;
 	public ArrayList <Entity> inventory = new ArrayList<>();
 	public final int inventorySize = 20;
+	public int batikCounter = 0;
 	
 	public Player(panelGame gp, KeyInputHandler keyH) {
 		
@@ -61,7 +62,7 @@ public class Player extends Entity{
 		direction = "down";
 		
 		//PLAYER STATUS
-		maxLife = 10;
+		maxLife = 8;
 		life = maxLife;
 		
 	}
@@ -246,6 +247,7 @@ public class Player extends Entity{
 		if(i != 999) {
 			//pickup only item
 			if(gp.obj[i].type == 6) {
+				batikCounter++;
 				inventory.add(gp.obj[i]);
 				gp.playSE(1);
 				gp.obj[i] = null;
@@ -264,7 +266,7 @@ public class Player extends Entity{
 					text = "Cannot carry anymore";
 				}
 			}
-			
+			System.out.println("Batik Counter : " + batikCounter);
 		}
 	}
 	

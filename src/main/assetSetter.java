@@ -43,8 +43,8 @@ public class assetSetter {
 	
 	public void setNPC() {
 		gp.npc[0] = new NPC_Bakul(gp);
-		gp.npc[0].worldX = 30*gp.tilesize;
-		gp.npc[0].worldY = 22*gp.tilesize;
+		gp.npc[0].worldX = 26*gp.tilesize;
+		gp.npc[0].worldY = 40*gp.tilesize;
 		
 //		gp.npc[1] = new NPC_Kakek(gp);
 //		gp.npc[1].worldX = 30*gp.tilesize;
@@ -87,6 +87,18 @@ public class assetSetter {
 		gp.monster[9] = new mon_wasp(gp);
 		gp.monster[9].worldX = gp.tilesize*13;
 		gp.monster[9].worldY = gp.tilesize*14;
+		
+		gp.monster[10] = new mon_redslime(gp);
+		gp.monster[10].worldX = gp.tilesize*12;
+		gp.monster[10].worldY = gp.tilesize*15;
+		
+		gp.monster[11] = new mon_redslime(gp);
+		gp.monster[11].worldX = gp.tilesize*2;
+		gp.monster[11].worldY = gp.tilesize*2;
+		
+		gp.monster[12] = new mon_redslime(gp);
+		gp.monster[12].worldX = gp.tilesize*43;
+		gp.monster[12].worldY = gp.tilesize*4;
 		
 		
 	}

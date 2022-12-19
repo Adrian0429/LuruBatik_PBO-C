@@ -53,12 +53,14 @@ public class panelGame extends JPanel implements Runnable{
 	public final int optionState = 5;
 	public final int characterState = 6;
 	public final int gameOverState = 7;
+	public final int endingScreenState = 8;
 	int FPS = 60;
 	
 	TileManager tileM = new TileManager(this);
 	public KeyInputHandler KeyH = new KeyInputHandler(this); // this handles keyboard awsd input
 	Sound music = new Sound();
 	Sound soundEffect = new Sound();
+	public boolean fullScreenOn = false;
 	
 	public CollisionChecker cChecker = new CollisionChecker(this);
 	

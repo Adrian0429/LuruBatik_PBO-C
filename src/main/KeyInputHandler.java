@@ -7,7 +7,7 @@ import java.nio.charset.CoderMalfunctionError;
 public class KeyInputHandler implements KeyListener{
 	
 	panelGame gp;
-	public boolean UpFlag, DownFlag, LeftFlag, RightFlag, enterPressed;
+	public boolean UpFlag, DownFlag, LeftFlag, RightFlag, enterPressed,escapePressed;
 	
 	public KeyInputHandler(panelGame gp) {
 		this.gp = gp;
@@ -105,9 +105,12 @@ public class KeyInputHandler implements KeyListener{
 			if(kode == KeyEvent.VK_ENTER) {
 				enterPressed = true;
 			}
+			if(kode == KeyEvent.VK_ESCAPE) {
+				escapePressed = true;
+			}
 			int maxCommand = 0;
 			switch(gp.ui.subState) {
-			case 0 : maxCommand = 3;
+			case 0 : maxCommand = 4;
 			}
 			if(kode == KeyEvent.VK_W) {
 				gp.ui.command--;
@@ -121,6 +124,24 @@ public class KeyInputHandler implements KeyListener{
 				gp.playSE(3);
 				if(gp.ui.command > maxCommand) {
 					gp.ui.command = 0;
+				}
+			}
+			if(kode == KeyEvent.VK_A) {
+				if(gp.ui.subState == 0) {
+					if(gp.ui.command == 1 && gp.music.volumeScale > 0) {
+						gp.music.volumeScale--;
+						gp.music.checkVolume();
+						gp.playSE(3);
+					}
+				}
+			}
+			if(kode == KeyEvent.VK_D) {
+				if(gp.ui.subState == 0) {
+					if(gp.ui.command == 1 && gp.music.volumeScale < 5) {
+						gp.music.volumeScale++;
+						gp.music.checkVolume();
+						gp.playSE(3);
+					}
 				}
 			}
 		}else if(gp.gameState == gp.gameOverState) {

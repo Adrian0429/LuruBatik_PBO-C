@@ -7,6 +7,7 @@ import java.awt.FontFormatException;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+import java.beans.IntrospectionException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -238,7 +239,7 @@ public class UI {
 		int x = gp.tilesize * 2;
 		int y = gp.tilesize /2;
 		int width = gp.panjangScreen -(gp.tilesize*4);
-		int height = gp.tilesize * 5;
+		int height = gp.tilesize * 4;
 		
 		drawSubWindow(x, y, width, height);
 		
@@ -330,7 +331,7 @@ public class UI {
 	}
 	public void drawOptionScreen() {
 		g2.setColor(Color.white);
-		g2.setFont(g2.getFont().deriveFont(32F));
+		g2.setFont(g2.getFont().deriveFont(16F));
 		
 		//POSITION
 		int frameX = gp.tilesize * 6;
@@ -342,8 +343,10 @@ public class UI {
 		switch(subState) {
 		case 0: options_top(frameX, frameY);break;
 		case 1: break;
-		case 2: break;
+		case 2: option_control(frameX, frameY);break;
+		case 3: break;
 		}
+		gp.KeyH.enterPressed = false;
 	}
 	public void options_top(int frameX, int frameY) {
 		int textX;
@@ -354,13 +357,22 @@ public class UI {
 		textX = getXforCenteredText(text);
 		textY = frameY + gp.tilesize;
 		g2.drawString(text, textX, textY);
-		
+
 		//full screen option
 		textX = frameX + gp.tilesize;
 		textY += gp.tilesize * 2;
 		g2.drawString("Full Screen", textX, textY);
 		if(command == 0) {
 			g2.drawString(">", textX-25, textY);
+			if(gp.KeyH.enterPressed == true) {
+				if(gp.fullScreenOn == false) {
+					gp.fullScreenOn = true;
+					gp.setFullScreen();
+				}
+				else if(gp.fullScreenOn == true) {
+					gp.fullScreenOn = false;
+				}
+			}
 		}
 		
 		//music
@@ -370,20 +382,90 @@ public class UI {
 			g2.drawString(">", textX-25, textY);
 		}
 		
+		//control
+		textY += gp.tilesize;
+		g2.drawString("Control", textX, textY);
+		if(command == 2) {
+			g2.drawString(">", textX-25, textY);
+			if(gp.KeyH.enterPressed == true) {
+				subState = 2;
+				command = 0;
+			}
+		}
+		
 		//end game
 		textY += gp.tilesize;
 		g2.drawString("End Game", textX, textY);
-		if(command == 2) {
+		if(command == 3) {
 			g2.drawString(">", textX-25, textY);
+			if(gp.KeyH.enterPressed == true) {
+				gp.stopMusic();
+				gp.playSE(10);
+				gp.gameState = gp.titleState;
+				command = 0;
+			}
 		}
 		
 		//back
 		textY += gp.tilesize*2;
 		g2.drawString("Back", textX, textY);
-		if(command == 3) {
+		if(command == 4) {
 			g2.drawString(">", textX-25, textY);
+			if(gp.KeyH.enterPressed == true) {
+				gp.gameState = gp.playState;
+			}
+		}
+		
+		//check box for full screen
+		textX = frameX + gp.tilesize*6-50;
+		textY = frameY + gp.tilesize*2 + 26;
+		g2.setStroke(new BasicStroke(3));
+		g2.drawRect(textX, textY,24,24);
+		if(gp.fullScreenOn == true) {
+			g2.fillRect(textX, textY,24,24);
+		}
+		
+		//music slider
+		textY += gp.tilesize;
+		g2.drawRect(textX, textY, 120, 24);
+		int volumeWidth = 24 * gp.music.volumeScale;
+		g2.fillRect(textX, textY, volumeWidth, 24);
+		
+	}
+	public void option_control(int frameX, int frameY) {
+		int textX;
+		int textY;
+		
+		//title
+		String text = "Control";
+		textX = getXforCenteredText(text)-96;
+		textY = frameY + gp.tilesize * 2;
+		g2.drawString("Move Up", textX, textY); textY += gp.tilesize;
+		g2.drawString("Move Left", textX, textY); textY += gp.tilesize;
+		g2.drawString("Move Down", textX, textY); textY += gp.tilesize;
+		g2.drawString("Move Right", textX, textY); textY += gp.tilesize;
+		g2.drawString("Interact", textX, textY); textY += gp.tilesize;
+		g2.drawString("Attack", textX, textY); textY += gp.tilesize;
+		g2.drawString("Inventory", textX, textY); textY += gp.tilesize;
+		g2.drawString("Options", textX, textY); textY += gp.tilesize;
+		
+		textX = frameX + gp.tilesize*6-12;
+		textY = frameY + gp.tilesize*2;
+		g2.drawString("W", textX, textY); textY += gp.tilesize;
+		g2.drawString("A", textX, textY); textY += gp.tilesize;
+		g2.drawString("S", textX, textY); textY += gp.tilesize;
+		g2.drawString("D", textX, textY); textY += gp.tilesize;
+		g2.drawString("Enter", textX, textY); textY += gp.tilesize;
+		g2.drawString("Enter", textX, textY); textY += gp.tilesize;
+		g2.drawString("I", textX, textY); textY += gp.tilesize;
+		g2.drawString("Esc", textX, textY); textY += gp.tilesize;
+		//back
+
+		if(command == 0) {
+			if(gp.KeyH.enterPressed == true) {
+				subState = 0;
+			}
 		}
 	}
-	
 }
 

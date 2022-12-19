@@ -4,6 +4,7 @@ import java.util.Random;
 
 import Entity.Entity;
 import main.panelGame;
+import object.obj_scroll;
 
 public class mon_wasp extends Entity {
 
@@ -60,5 +61,13 @@ public class mon_wasp extends Entity {
 			}
 			actionLockCounter = 0;
 		}
+	}
+	public void checkDrop() {
+		int i = new Random().nextInt(100) + 1;
+		
+		if(i < 50) {
+			dropItem(new obj_scroll(gp));
+		}
+		
 	}
 }
