@@ -104,6 +104,12 @@ public class KeyInputHandler implements KeyListener{
 				gp.gameState = gp.playState;
 			}
 		}
+		else if(gp.gameState == gp.dialogueState2) {
+			if(kode == KeyEvent.VK_ENTER) {
+				gp.playSE(12);
+				gp.gameState = gp.endingScreenState;
+			}
+		}
 		//options state
 		else if(gp.gameState == gp.optionState) {
 			if(kode == KeyEvent.VK_ESCAPE) {

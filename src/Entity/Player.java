@@ -6,7 +6,6 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import javax.print.ServiceUIFactory;
 
 import main.KeyInputHandler;
 import main.panelGame;
@@ -26,7 +25,7 @@ public class Player extends Entity{
 	public int solidAreaDefaultY;
 	public ArrayList <Entity> inventory = new ArrayList<>();
 	public final int inventorySize = 20;
-	public int batikCounter = 1;
+	public int batikCounter = 5;
 	
 	public Player(panelGame gp, KeyInputHandler keyH) {
 		
@@ -56,10 +55,10 @@ public class Player extends Entity{
 
 	
 	public void setDefaultValue() {
-//		worldX = gp.tilesize * 24;
-//		worldY = gp.tilesize * 44;
-		worldX = gp.tilesize * 30;
-		worldY = gp.tilesize * 25;
+		worldX = gp.tilesize * 24;
+		worldY = gp.tilesize * 44;
+		// worldX = gp.tilesize * 30;
+		// worldY = gp.tilesize * 25;
 		speed = 4;
 		direction = "down";
 		
@@ -249,11 +248,11 @@ public class Player extends Entity{
 		
 		if(i != 999) {
 			//pickup only item
-			if(gp.obj[gp.currentMap][i].type == 6) {
+			if(gp.obj[0][i].type == 6) {
 				batikCounter++;
-				inventory.add(gp.obj[gp.currentMap][i]);
+				inventory.add(gp.obj[0][i]);
 				gp.playSE(1);
-				gp.obj[gp.currentMap][i] = null;
+				gp.obj[0][i] = null;
 			}else if(gp.obj[gp.currentMap][i].type == 5) {
 				hasKey++;
 				inventory.add(gp.obj[gp.currentMap][i]);
@@ -281,20 +280,21 @@ public class Player extends Entity{
 			}
 			System.out.println("Batik Counter : " + batikCounter);
 		}
-		if(batikCounter == 5) {
-			gp.gameState = gp.endingScreenState;
-			gp.playSE(12);
-		}
 	}
-	
 	
 	public void interactNPC(int i) {
 		if(gp.KeyH.enterPressed == true) {
 			gp.playSE(6);
 			if(i != 999) {
-				
-				gp.gameState = gp.dialogueState;
-				gp.npc[gp.currentMap][i].speak();	
+				if(batikCounter >= 5){
+					gp.stopMusic();
+					gp.gameState = gp.dialogueState2;
+					gp.npc[gp.currentMap][i].speak2();	
+//					gp.playSE(12);
+				}else{
+					gp.gameState = gp.dialogueState;
+					gp.npc[gp.currentMap][i].speak();
+				}
 			}
 			else {
 				gp.playSE(8);

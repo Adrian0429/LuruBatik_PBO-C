@@ -54,6 +54,7 @@ public class panelGame extends JPanel implements Runnable{
 	public final int characterState = 6;
 	public final int gameOverState = 7;
 	public final int endingScreenState = 8;
+	public final int dialogueState2 = 9;
 	int FPS = 60;
 	
 	TileManager tileM = new TileManager(this);
@@ -145,14 +146,12 @@ public class panelGame extends JPanel implements Runnable{
 		
 		while(gameThread != null) {
 
-			//1 update, information such as position etc
+			//update
 			update();
-			//2 draw, draw environment etc
+			//draw
 			drawToTempScreen();
 			drawToScreen();
-			//we do this per fps
-			
-			
+			//do per fps
 			
 			try {
 				double timeLeft = nextDrawTime - System.nanoTime();

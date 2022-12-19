@@ -106,6 +106,26 @@ public class Entity {
 			break;
 		}
 	}
+
+	public void speak2() {
+		gp.ui.currentDialogue = dialogues[5];
+		
+		switch (gp.player.direction) {
+		case "up": 
+			direction = "down";
+			break;
+		case "down":
+			direction = "up";
+			break;
+		case "right": 
+			direction = "left";
+			break;
+		case "left":
+			direction = "right";
+			break;
+		}
+	}
+
 	public void update() {
 		setAction();
 		

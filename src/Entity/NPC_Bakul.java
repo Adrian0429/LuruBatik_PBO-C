@@ -49,5 +49,10 @@ public class NPC_Bakul extends Entity {
 		
 		super.speak();
 	}
-
+	
+	public void speak2() {
+		dialogues[5] = "Wah kamu telah berhasil!";
+		dialogues[6] = "Kakek sangat bangga...";
+		super.speak2();
+	}
 }

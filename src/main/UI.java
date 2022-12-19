@@ -7,7 +7,6 @@ import java.awt.FontFormatException;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.beans.IntrospectionException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -81,6 +80,10 @@ public class UI {
 			drawPlayerLife();
 			drawDialogueScreen();
 		}
+		if(gp.gameState == gp.dialogueState2) {
+			drawPlayerLife();
+			drawDialogueScreen2();
+		}
 		if(gp.gameState == gp.optionState) {
 			drawOptionScreen();
 		}
@@ -101,18 +104,18 @@ public class UI {
 	}
 	public void drawEndingScreen() {
 		gp.stopMusic();
-
+		
 		g2.setColor(new Color(0,0,0,150));
 		g2.fillRect(0, 0, gp.panjangScreen, gp.TinggiScreen);
 		int x;
 		int y;
 		String text;
-		g2.setFont(g2.getFont().deriveFont(Font.BOLD,75F));
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD,65F));
 		
-		text = "GAME FINISH";
+		text = "GAME FINISHED";
 		g2.setColor(Color.BLACK);
 		x = getXforCenteredText(text);
-		y = gp.tilesize*5;
+		y = gp.tilesize*4;
 		g2.drawString(text, x, y);
 		
 		// main
@@ -123,11 +126,24 @@ public class UI {
 		g2.setFont(g2.getFont().deriveFont(30f));
 		text = "Quit";
 		x = getXforCenteredText(text);
-		y = gp.tilesize * 8;
+		y = gp.tilesize * 7;
 		g2.drawString(text, x, y);
 		if(command == 0) {
 			g2.drawString(">", x-40, y);
 		}	
+		
+		//nama
+		g2.setFont(g2.getFont().deriveFont(20f));
+		text = "- Luru Batik -";
+		x = getXforCenteredText(text);
+		y += gp.tilesize *3;
+		g2.drawString(text, x, y);
+		
+		g2.setFont(g2.getFont().deriveFont(15f));
+		text = "by Calvin & Adrian";
+		x = getXforCenteredText(text);
+		y += gp.tilesize;
+		g2.drawString(text, x, y);
 	}
 	public void drawGameOverScreen() {
 		g2.setColor(new Color(0,0,0,150));
@@ -289,6 +305,26 @@ public class UI {
 		
 	}
 	
+	public void drawDialogueScreen2() {
+		//window
+		int x = gp.tilesize * 2;
+		int y = gp.tilesize /2;
+		int width = gp.panjangScreen -(gp.tilesize*4);
+		int height = gp.tilesize * 4;
+		
+		drawSubWindow(x, y, width, height);
+		
+		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 20F));
+		x += gp.tilesize;
+		y += gp.tilesize;
+		
+		for(String line : currentDialogue.split("\n")) {
+			g2.drawString(line, x, y);
+			y+= 40;
+		}
+		
+	}
+
 	public void drawSubWindow(int x, int y, int width, int height) {
 		Color c = new Color(0,0,0, 190);
 		g2.setColor(c);
