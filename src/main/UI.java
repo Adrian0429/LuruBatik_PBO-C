@@ -111,7 +111,7 @@ public class UI {
 		int y;
 		String text;
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD,65F));
-		
+		command = 0;
 		text = "GAME FINISHED";
 		g2.setColor(Color.BLACK);
 		x = getXforCenteredText(text);

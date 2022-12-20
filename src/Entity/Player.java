@@ -25,7 +25,7 @@ public class Player extends Entity{
 	public int solidAreaDefaultY;
 	public ArrayList <Entity> inventory = new ArrayList<>();
 	public final int inventorySize = 20;
-	public int batikCounter = 3;
+	public int batikCounter = 5;
 	
 	public Player(panelGame gp, KeyInputHandler keyH) {
 		
@@ -251,8 +251,8 @@ public class Player extends Entity{
 				String text;
 				if(hasKey > 0) {
 					if(inventory.size() != inventorySize) {
-						hasKey--;
 						batikCounter++;
+						hasKey--;
 						inventory.add(gp.obj[gp.currentMap][i]);
 						gp.playSE(1);
 						text = "Got a " + gp.obj[gp.currentMap][i].name + "!";
@@ -281,6 +281,7 @@ public class Player extends Entity{
 			}else if(gp.obj[0][i].type == 6) {
 				String text;
 				if(inventory.size() != inventorySize) {
+					batikCounter++;
 					inventory.add(gp.obj[gp.currentMap][i]);
 					gp.playSE(1);
 					text = "Got a " + gp.obj[gp.currentMap][i].name + "!";

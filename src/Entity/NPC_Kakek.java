@@ -33,11 +33,11 @@ public class NPC_Kakek extends Entity {
 	}
 	
 	public void setDialogue() {
-		dialogues[0] = "Hello, kid";
-		dialogues[1] = "tugasmu adalah untuk \nmengumpulkan Batik-Batik";
-		dialogues[2] = "benar, Batik kain yang \nsering kita pakai";
-		dialogues[3] = "Batik-batik ini telah disebar \ndi sekitar kita";
-		dialogues[4] = "Gunakan kunci untuk \nmembuka chest";
+		dialogues[0] = "Halo nak! Kemana saj\nkamu...";
+		dialogues[1] = "Kakek punya keinginan \nmengumpulkan Batik-Batik";
+		dialogues[2] = "Benar, batik kain yang \nsering kita pakai";
+		dialogues[3] = "Batik-batik ini telah disebar\ndi sekitar kita";
+		dialogues[4] = "Lawan monster dan buka\nchest untuk mendapatkan";
 		
 	}
 	

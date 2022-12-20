@@ -53,8 +53,8 @@ public class assetSetter {
 		i++;
 		mapNum = 1;
 		gp.npc[mapNum][i] = new NPC_Kakek(gp);
-		gp.npc[mapNum][i].worldX = 18*gp.tilesize;
-		gp.npc[mapNum][i].worldY = 14*gp.tilesize;
+		gp.npc[mapNum][i].worldX = 25*gp.tilesize;
+		gp.npc[mapNum][i].worldY = 21*gp.tilesize;
 		i++;
 	}
 	
