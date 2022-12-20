@@ -50,7 +50,6 @@ public class EventHandler {
     	}
     	
     	if(canTouchEvent == true) {
-    		 	if(hit(0,1,20, "any") == true) {cactusHit(1,20,gp.dialogueState);}
     		           
     	        if(hit(0,8,21,"any") == true){cactusHit(8,21,gp.dialogueState);  }
     	               
@@ -123,13 +122,7 @@ public class EventHandler {
       
         return hit;
     }
-    
-    public void damagePit (int gameState) {
-    	gp.gameState = gameState;
-    	gp.ui.currentDialogue = "You fall into a pit!";
-    	gp.player.life -= 1;
-    	canTouchEvent = false;
-    }
+
     
     public void cactusHit (int col, int row, int gameState) {
     	gp.gameState = gameState;

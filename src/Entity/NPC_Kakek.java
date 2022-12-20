@@ -18,9 +18,17 @@ public class NPC_Kakek extends Entity {
 	public void getImage() {
 		
 	up1 = setup("/npc/kakek1");
+	up2 = setup("/npc/kakek1");
+	up3 = setup("/npc/kakek1");
 	down1 = setup("/npc/kakek2");
+	down2 = setup("/npc/kakek2");
+	down3 = setup("/npc/kakek2");
 	right1 = setup("/npc/kakek3");
+	right2 = setup("/npc/kakek3");
+	right3 = setup("/npc/kakek3");
 	left1 = setup("/npc/kakek1");
+	left2 = setup("/npc/kakek1");
+	left3 = setup("/npc/kakek1");
 
 	}
 	

@@ -25,7 +25,7 @@ public class Player extends Entity{
 	public int solidAreaDefaultY;
 	public ArrayList <Entity> inventory = new ArrayList<>();
 	public final int inventorySize = 20;
-	public int batikCounter = 5;
+	public int batikCounter = 3;
 	
 	public Player(panelGame gp, KeyInputHandler keyH) {
 		
@@ -57,8 +57,7 @@ public class Player extends Entity{
 	public void setDefaultValue() {
 		worldX = gp.tilesize * 24;
 		worldY = gp.tilesize * 44;
-		// worldX = gp.tilesize * 30;
-		// worldY = gp.tilesize * 25;
+
 		speed = 4;
 		direction = "down";
 		
@@ -248,23 +247,49 @@ public class Player extends Entity{
 		
 		if(i != 999) {
 			//pickup only item
-			if(gp.obj[0][i].type == 6) {
-				batikCounter++;
-				inventory.add(gp.obj[0][i]);
-				gp.playSE(1);
-				gp.obj[0][i] = null;
-			}else if(gp.obj[gp.currentMap][i].type == 5) {
-				hasKey++;
-				inventory.add(gp.obj[gp.currentMap][i]);
-				gp.playSE(1);
-				gp.obj[gp.currentMap][i] = null;
-			}else if(gp.obj[gp.currentMap][i].type == 4) {
-				hasKey--;
-				batikCounter++;
-				gp.playSE(1);
-				gp.obj[gp.currentMap][i] = null;
+			if(gp.obj[0][i].type == 4) {
+				String text;
+				if(hasKey > 0) {
+					if(inventory.size() != inventorySize) {
+						hasKey--;
+						batikCounter++;
+						inventory.add(gp.obj[gp.currentMap][i]);
+						gp.playSE(1);
+						text = "Got a " + gp.obj[gp.currentMap][i].name + "!";
+						gp.obj[0][i] = null;
+					}
+					else {
+						text = "Cannot carry anymore";
+					}
+				}else {
+					text = "need a key!";
+				}
+				
 			}
-			
+			else if(gp.obj[0][i].type == 5) {
+				String text;
+				if(inventory.size() != inventorySize) {
+					hasKey++;
+					inventory.add(gp.obj[gp.currentMap][i]);
+					gp.playSE(1);
+					text = "Got a " + gp.obj[gp.currentMap][i].name + "!";
+					gp.obj[0][i] = null;
+				}
+				else {
+					text = "Cannot carry anymore";
+				}
+			}else if(gp.obj[0][i].type == 6) {
+				String text;
+				if(inventory.size() != inventorySize) {
+					inventory.add(gp.obj[gp.currentMap][i]);
+					gp.playSE(1);
+					text = "Got a " + gp.obj[gp.currentMap][i].name + "!";
+					gp.obj[0][i] = null;
+				}
+				else {
+					text = "Cannot carry anymore";
+				}
+			}
 			//inventory item
 			else{
 				String text;
@@ -272,7 +297,7 @@ public class Player extends Entity{
 					inventory.add(gp.obj[gp.currentMap][i]);
 					gp.playSE(1);
 					text = "Got a " + gp.obj[gp.currentMap][i].name + "!";
-					gp.obj[i] = null;
+					gp.obj[0][i] = null;
 				}
 				else {
 					text = "Cannot carry anymore";

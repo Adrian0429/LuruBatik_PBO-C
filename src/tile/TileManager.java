@@ -46,7 +46,7 @@ public class TileManager {
 		setup(13, "013", false);
 		setup(14, "014", false);
 		setup(15, "015", false);
-		setup(16, "016", false);
+		setup(16, "016", true);
 		setup(17, "017", false);
 		setup(18, "018", true);
 		setup(19, "019", true);

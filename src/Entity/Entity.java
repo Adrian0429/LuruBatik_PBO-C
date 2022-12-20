@@ -258,22 +258,22 @@ public class Entity {
 	public void dyingAnimation(Graphics2D g2) {
 		dyingCounter++;
 		
-		if(dyingCounter <= 5) {
+		if(dyingCounter <= 2) {
 			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0f));
 		}
-		if(dyingCounter > 5 && dyingCounter <= 10) {
+		if(dyingCounter > 3 && dyingCounter <= 6) {
 			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 		}
-		if(dyingCounter > 10 && dyingCounter <= 15) {
+		if(dyingCounter > 6 && dyingCounter <= 9) {
 			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0f));
 		}
-		if(dyingCounter > 15 && dyingCounter <= 20) {
+		if(dyingCounter > 9 && dyingCounter <= 12) {
 			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 		}
-		if(dyingCounter > 20 && dyingCounter <= 25) {
+		if(dyingCounter > 12 && dyingCounter <= 15) {
 			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0f));
 		}
-		if(dyingCounter > 25) {
+		if(dyingCounter > 15) {
 			dying = false;
 			alive = false;
 		}

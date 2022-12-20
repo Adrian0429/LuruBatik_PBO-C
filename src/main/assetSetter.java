@@ -22,12 +22,12 @@ public class assetSetter {
 		int mapNum = 0;
 		int i=0;
 		gp.obj[mapNum][i] = new obj_key(gp);
-		gp.obj[mapNum][i].worldX = 29*gp.tilesize;
-		gp.obj[mapNum][i].worldY = 48*gp.tilesize;
+		gp.obj[mapNum][i].worldX = 18*gp.tilesize;
+		gp.obj[mapNum][i].worldY = 37*gp.tilesize;
 		i++;
 		gp.obj[mapNum][i] = new obj_key(gp);
-		gp.obj[mapNum][i].worldX = 21*gp.tilesize;
-		gp.obj[mapNum][i].worldY = 13*gp.tilesize;
+		gp.obj[mapNum][i].worldX = 22*gp.tilesize;
+		gp.obj[mapNum][i].worldY = 12*gp.tilesize;
 		i++;
 		gp.obj[mapNum][i] = new obj_chest_brown(gp);
 		gp.obj[mapNum][i].worldX = 28*gp.tilesize;
@@ -53,8 +53,8 @@ public class assetSetter {
 		i++;
 		mapNum = 1;
 		gp.npc[mapNum][i] = new NPC_Kakek(gp);
-		gp.npc[mapNum][i].worldX = 4*gp.tilesize;
-		gp.npc[mapNum][i].worldY = 4*gp.tilesize;
+		gp.npc[mapNum][i].worldX = 18*gp.tilesize;
+		gp.npc[mapNum][i].worldY = 14*gp.tilesize;
 		i++;
 	}
 	
